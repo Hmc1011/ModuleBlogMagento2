@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+<table name="catalog_product_entity_datetime" resource="default" engine="innodb"
+           comment="This table declare infomations of Blog Page in Module HoangCong_Blog">
+    <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Post ID"/>
+    <column xsi:type="varchar" name="url_key" padding="100"  nullable="true" default="/" comment="url key"/>
+    <column xsi:type="varchar" name="title" padding="255"  nullable="true" default="this is title of the post" comment="Blog Title"/>
+    <column xsi:type="longtext" name="post"  nullable="true" comment="Content of the post"/>
+    <column xsi:type="smallint" name="is_active" padding="1" unsigned="true" nullable="false" identity="false" comment="define post showable"/>
+     <column xsi:type="datetime" name="creation_time" on_update="false" nullable="true" comment="Creation time of the post"/>
+     <column xsi:type="datetime" name="update_time" on_update="true" nullable="true" comment="Update time of the post"/>
+         
+
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="value_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="CAT_PRD_ENTT_DTIME_ATTR_ID_EAV_ATTR_ATTR_ID" table="catalog_product_entity_datetime" column="attribute_id" referenceTable="eav_attribute" referenceColumn="attribute_id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign" referenceId="CAT_PRD_ENTT_DTIME_ENTT_ID_CAT_PRD_ENTT_ENTT_ID" table="catalog_product_entity_datetime" column="entity_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign" referenceId="CATALOG_PRODUCT_ENTITY_DATETIME_STORE_ID_STORE_STORE_ID" table="catalog_product_entity_datetime" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+    <constraint xsi:type="unique" referenceId="CATALOG_PRODUCT_ENTITY_DATETIME_ENTITY_ID_ATTRIBUTE_ID_STORE_ID">
+        <column name="entity_id"/>
+        <column name="attribute_id"/>
+        <column name="store_id"/>
+    </constraint>
+    <index referenceId="CATALOG_PRODUCT_ENTITY_DATETIME_ATTRIBUTE_ID" indexType="btree">
+        <column name="attribute_id"/>
+    </index>
+    <index referenceId="CATALOG_PRODUCT_ENTITY_DATETIME_STORE_ID" indexType="btree">
+        <column name="store_id"/>
+    </index>
+</table>
