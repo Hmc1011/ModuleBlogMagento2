@@ -1,6 +1,9 @@
 <?php
 namespace HoangCong\Blog\Api;
 
+use Magento\Framework\Api\SearchCriteriaInterface;
+use HoangCong\Blog\Api\Data\PostInterface;
+
 /**
  * Interface PostRepository
  * @package HoangCong\Blog\Api
@@ -9,15 +12,16 @@ interface  PostRepositoryInterface
 {
     /**
      * @param int $id
-     * @return \ViMagento\CustomApi\Api\Data\CustomInterface
+     * @return \HoangCong\Blog\Api\Data\PostInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getById($id);
 
     /**
-     * @param \ViMagento\CustomApi\Api\Data\CustomInterface $vimagento
-     * @return \ViMagento\CustomApi\Api\Data\CustomInterface
+     * @param \HoangCong\Blog\Api\Data\PostInterface $post
+     * @return \HoangCong\Blog\Api\Data\PostInterface 
      */
-    public function save(CustomInterface $vimagento);
+    public function save(PostInterface $post);
 
     /**
      * @param int $id
@@ -27,7 +31,7 @@ interface  PostRepositoryInterface
 
     /**
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \ViMagento\CustomApi\Api\Data\CustomSearchResultInterface
+     * @return \ViMagento\CustomApi\Api\Data\PostSearchResultInterface
      */
     public function getList(SearchCriteriaInterface $searchCriteria);
 }
