@@ -13,7 +13,7 @@ interface  PostInterface extends ExtensibleDataInterface
     const POST_ID='post_id';
     const URL_KEY='url_key';
     const TITLE='title';
-    const CONTENT='content';
+    const CONTENT='post';
     const CREATION_TIME='creation_time';
     const UPDATE_TIME='update_time';
     const IS_ACTIVE='is_active';

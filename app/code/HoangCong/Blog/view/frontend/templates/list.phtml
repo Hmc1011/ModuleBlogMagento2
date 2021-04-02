@@ -1,0 +1,16 @@
+<?php
+    foreach ($block->getPosts() as $post)
+    {
+?>
+<h1> 
+<a href="<?php  echo $post->getUrl();  ?> ">  
+            <?php  echo $post->getTitle();   ?> 
+</a>
+ </h1>
+<i>  <?php  echo $post->getCreationTime();  ?>  </i>
+<p>
+<br>
+<?php
+echo $post->getContent();  }
+?>
+</p>

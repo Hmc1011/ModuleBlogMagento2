@@ -15,6 +15,6 @@ class Index extends \Magento\Framework\App\Action\Action
 
 	public function execute()
 	{
-		echo "toi la cong";
+			return $this->_pageFactory->create();
 	}
 }
