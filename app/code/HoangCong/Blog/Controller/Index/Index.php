@@ -15,6 +15,7 @@ class Index extends \Magento\Framework\App\Action\Action
 
 	public function execute()
 	{
+		$this->_objectManager->get('Psr\Log\LoggerInterface')->debug('toi la cong');
 			return $this->_pageFactory->create();
 	}
 }

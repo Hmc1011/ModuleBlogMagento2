@@ -15,23 +15,23 @@ interface  PostRepositoryInterface
      * @return \HoangCong\Blog\Api\Data\PostInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getById($id);
+    // public function getById($id);
 
     /**
      * @param \HoangCong\Blog\Api\Data\PostInterface $post
      * @return \HoangCong\Blog\Api\Data\PostInterface 
      */
-    public function save(PostInterface $post);
+    // public function save(PostInterface $post);
 
     /**
      * @param int $id
      * @return bool
      */
-    public function deleteById($id);
+    // public function deleteById($id);
 
     /**
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \ViMagento\CustomApi\Api\Data\PostSearchResultInterface
+     * @return \HoangCong\Blog\Api\Data\PostSearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $searchCriteria);
+    // public function getList(SearchCriteriaInterface $searchCriteria);
 }

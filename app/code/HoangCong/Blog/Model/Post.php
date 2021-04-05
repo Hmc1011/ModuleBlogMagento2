@@ -66,6 +66,10 @@ class Post extends AbstractExtensibleModel implements PostInterface
     public function setIsActive($isActive)
     {
     }
+    public function checkUrlKey($url_key)
+    {
+        return $this->_getResource()->checkUrlKey($url_key);      
+    }
 
 
     // public function setName($name)
