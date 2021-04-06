@@ -16,5 +16,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             \HoangCong\Blog\Model\Post::class,
             \HoangCong\Blog\Model\ResourceModel\Post::class
         );
+
     }
 }

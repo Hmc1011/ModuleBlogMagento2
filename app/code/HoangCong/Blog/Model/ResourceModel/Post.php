@@ -13,12 +13,17 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
     public function checkUrlKey($url_key)
     {
-            var_dump( $this);
+            $connection = $this->getConnection();
+            $tableName= $this->_mainTable;
 
-        //    var_dump($this->getConnection());
-        if  ($url_key =="1")  return 1;
-        else  return false;
+            $sql = $connection->select()->from($tableName, array('url_key'))
+            ->where('url_key=?',$url_key);
+            $colResult= $connection->fetchCol($sql);
+            // var_dump($colResult);
+            // echo ($sql->__toString() );
 
-        // if  ($url_key=='1') return 1;
+            if  (count($colResult)==0) return false;
+            return true;
+
     }
 }

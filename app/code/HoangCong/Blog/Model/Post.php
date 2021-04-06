@@ -2,17 +2,18 @@
 
 namespace HoangCong\Blog\Model;
 
+use Elasticsearch\Endpoints\Ml\GetDatafeeds;
 use Magento\Framework\Model\AbstractExtensibleModel;
 use HoangCong\Blog\Api\Data\PostExtensionInterface;
 use HoangCong\Blog\Api\Data\PostInterface;
-
+use \Magento\Framework\App\Config\ScopeConfigInterface;
 
 class Post extends AbstractExtensibleModel implements PostInterface
 {
     // const NAME = 'name';
     // const INGREDIENTS = 'ingredients';
     // const IMAGE_URLS = 'image_urls';
-
+protected $scopeConfig;
     protected function _construct()
     {
         $this->_init(ResourceModel\Post::class);
@@ -49,7 +50,7 @@ class Post extends AbstractExtensibleModel implements PostInterface
     }
     public function getUrl()
     {
-        return "/";
+        return "/blog/". $this->_getData(self::URL_KEY) ;
     }
     public function setTitle($title)
     {
