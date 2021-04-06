@@ -58,7 +58,7 @@ interface  PostInterface extends ExtensibleDataInterface
       /**
        * @param int $id
        */
-      public function setID($id);
+      public function setId($id);
       
       /**
        * @param int $url_key

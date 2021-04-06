@@ -13,7 +13,8 @@ class Post extends AbstractExtensibleModel implements PostInterface
     // const NAME = 'name';
     // const INGREDIENTS = 'ingredients';
     // const IMAGE_URLS = 'image_urls';
-protected $scopeConfig;
+    
+
     protected function _construct()
     {
         $this->_init(ResourceModel\Post::class);
@@ -50,7 +51,7 @@ protected $scopeConfig;
     }
     public function getUrl()
     {
-        return "/blog/". $this->_getData(self::URL_KEY) ;
+         return "/blog/". $this->_getData(self::URL_KEY) ;
     }
     public function setTitle($title)
     {

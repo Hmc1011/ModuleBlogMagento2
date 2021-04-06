@@ -16,14 +16,15 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $connection = $this->getConnection();
             $tableName= $this->_mainTable;
 
-            $sql = $connection->select()->from($tableName, array('url_key'))
+            $sql = $connection->select()->from($tableName, array('*'))
             ->where('url_key=?',$url_key);
             $colResult= $connection->fetchCol($sql);
+
             // var_dump($colResult);
             // echo ($sql->__toString() );
 
             if  (count($colResult)==0) return false;
-            return true;
+            return $colResult[0];
 
     }
 }
