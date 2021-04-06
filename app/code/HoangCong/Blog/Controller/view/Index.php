@@ -38,9 +38,6 @@ class Index implements HttpGetActionInterface
      */
     public function execute()
     {
-        // Get the params that were passed from our Router
-        $postID = $this->request->getParam('post_id', null);
-		// echo "<h1> iD of POST: ". $postID ."</h1>";
         return $this->pageFactory->create();
     }
 }
