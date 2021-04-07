@@ -41,7 +41,15 @@ class Router implements RouterInterface
      */
     public function match(RequestInterface $request)
     {
-        $url_key = trim($request->getPathInfo(), '/blog/');
+        $url_key = $request->getPathInfo() ;
+        $prefix = '/blog/';
+        $str = $url_key;
+
+        if (substr($str, 0, strlen($prefix)) == $prefix) {
+                $url_key = substr($str, strlen($prefix));
+        } 
+        
+        \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug($request->getPathInfo());
         $url_key= rtrim($url_key,'/');
         $this->logger->debug($url_key);
 

@@ -1,6 +1,8 @@
 <?php
 namespace HoangCong\Blog\Model\ResourceModel;
 
+use Magento\Framework\App\ObjectManager;
+
 /**
  * Class Post
  * @package HoangCong\Blog\Model\ResourceModel
@@ -13,6 +15,8 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
     public function checkUrlKey($url_key)
     {
+        ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug($url_key);
+
             $connection = $this->getConnection();
             $tableName= $this->_mainTable;
 
@@ -22,7 +26,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             // var_dump($colResult);
             // echo ($sql->__toString() );
-
+            ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug($sql->__toString());
             if  (count($colResult)==0) return false;
             return $colResult[0];
 
