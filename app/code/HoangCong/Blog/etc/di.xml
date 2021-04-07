@@ -3,4 +3,17 @@
     <preference for="HoangCong\Blog\Api\PostRepositoryInterface" type="HoangCong\Blog\Model\PostRepository"/>
     <preference for="HoangCong\Blog\Api\Data\PostInterface" type="HoangCong\Blog\Model\Post"/>
     <preference for="HoangCong\Blog\Api\Data\PostSearchResultInterface" type="HoangCong\Blog\Model\PostSearchResult"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_post_listing_data_source" xsi:type="string">HoangCong\Blog\Model\ResourceModel\Post\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="HoangCong\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hoangcong_blog</argument>
+            <argument name="resourceModel" xsi:type="string">HoangCong\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
 </config>
