@@ -1,26 +1,24 @@
 <?php
 namespace HoangCong\Blog\Block;
-use HoangCong\Blog\Api\Data\PostInterface;
-use HoangCong\Blog\Model\ResourceModel\Post\Collection as PostCollection;
+use HoangCong\Blog\Api\PostRepositoryInterface;
 
 class DetailPost extends \Magento\Framework\View\Element\Template
 {
 
-    protected $_postCollectionFactory;
+    protected $_postRepository;
 
 	public function __construct(\Magento\Framework\View\Element\Template\Context $context,
-    \HoangCong\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
+    PostRepositoryInterface $postRepository,
     array $data=[] )
 	{
 		parent::__construct($context,$data);
-        $this->_postCollectionFactory= $postCollectionFactory;
+        $this->_postRepository= $postRepository;
 	}
 
 	public function getPost()
 	{
         $post_id= $this->_request->getParam('post_id');  
-        return  $this->_postCollectionFactory->create()->addFieldToFilter('post_id', ['eq'=> $post_id  ] );
-        
-        ;
+        $post= $this->_postRepository->getById($post_id);
+        return $post;
 	}
 }

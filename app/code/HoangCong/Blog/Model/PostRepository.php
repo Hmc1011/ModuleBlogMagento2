@@ -38,9 +38,28 @@ class PostRepository implements PostRepositoryInterface
         $this->postCollectionFactory = $postCollectionFactory;
         $this->searchResultFactory = $postSearchResultInterfaceFactory;
     }
+
+    public function getById($id)
+{
+    $post = $this->postFactory->create();
+    $post->getResource()->load($post, $id);
+    if (! $post->getId()) {
+        throw new NoSuchEntityException(__('Unable to find post with ID "%1"', $id));
+    }
+    return $post;
+}
  
-    // ... getById, save and delete methods listed above ...
+public function save(PostInterface $post)
+{
+    $post->getResource()->save($post);
+    return $post;
+}
  
+public function delete(PostInterface $post)
+{
+    $post->getResource()->delete($post);
+}
+
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
         $collection = $this->collectionFactory->create();

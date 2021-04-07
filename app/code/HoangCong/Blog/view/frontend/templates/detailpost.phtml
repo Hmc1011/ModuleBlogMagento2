@@ -1,7 +1,5 @@
 <?php
-// var_dump($block->getPost());
-    foreach ($block->getPost() as $post)
-    {
+    $post= $block->getPost();
 ?>
 <h1> 
 <a href="<?php  echo $post->getUrl();  ?> ">  
@@ -13,7 +11,5 @@
 <br>
 <?php
 echo $post->getContent(); 
-
-}
 ?>
 </p>

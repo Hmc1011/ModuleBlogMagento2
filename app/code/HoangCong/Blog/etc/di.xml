@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="HoangCong\Blog\Api\PostRepositoryInterface" type="HoangCong\Blog\Model\PostRepository"/>
+    <preference for="HoangCong\Blog\Api\Data\PostInterface" type="HoangCong\Blog\Model\Post"/>
+    <preference for="HoangCong\Blog\Api\Data\PostSearchResultInterface" type="HoangCong\Blog\Model\PostSearchResult"/>
+</config>
