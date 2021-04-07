@@ -48,14 +48,15 @@ class Router implements RouterInterface
         if (substr($str, 0, strlen($prefix)) == $prefix) {
                 $url_key = substr($str, strlen($prefix));
         } 
-        
+
         \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug($request->getPathInfo());
         $url_key= rtrim($url_key,'/');
         $this->logger->debug($url_key);
 
         $post= $this->_postFactory->create();
         $post_id= $post->checkUrlKey($url_key);
-        // $this->logger->debug( var_dump($post_id));
+        // $this->logger->debug( var_dump($request));
+
         if  (!$post_id)
         {
             return null;         }

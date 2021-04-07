@@ -51,7 +51,7 @@ class Post extends AbstractExtensibleModel implements PostInterface
     }
     public function getUrl()
     {
-         return "/blog/". $this->_getData(self::URL_KEY) ;
+         return "/blog/". $this->_getData(self::URL_KEY).".html" ;
     }
     public function setTitle($title)
     {
