@@ -62,7 +62,7 @@ public function delete(PostInterface $post)
 
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
-        $collection = $this->collectionFactory->create();
+        $collection = $this->postCollectionFactory->create();
  
         $this->addFiltersToCollection($searchCriteria, $collection);
         $this->addSortOrdersToCollection($searchCriteria, $collection);
