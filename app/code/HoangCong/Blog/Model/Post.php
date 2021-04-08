@@ -19,7 +19,7 @@ class Post extends AbstractExtensibleModel implements PostInterface
     {
         $this->_init(ResourceModel\Post::class);
     }
-
+    
     public function getTitle()
     {
         return $this->_getData(self::TITLE);
@@ -51,7 +51,7 @@ class Post extends AbstractExtensibleModel implements PostInterface
     }
     public function getUrl()
     {
-         return "/blog/". $this->_getData(self::URL_KEY).".html" ;
+            return  $this->_getData(self::URL_KEY).".html" ;
     }
     public function setTitle($title)
     {
@@ -73,6 +73,10 @@ class Post extends AbstractExtensibleModel implements PostInterface
         return $this->_getResource()->checkUrlKey($url_key);      
     }
 
+    public function getAvailableStatuses()
+    {
+        return [self::STATUS_ENABLED => __('Enabled'), self::STATUS_DISABLED => __('Disabled')];
+    }
 
     // public function setName($name)
     // {

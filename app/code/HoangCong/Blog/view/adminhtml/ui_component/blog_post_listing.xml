@@ -16,7 +16,7 @@
 	<settings>
 		<buttons>
 			<button name="add">
-				<url path="*/*/new" />
+				<url path="*/*/newpost" />
 				<class>
 					primary
 				</class>
@@ -26,7 +26,7 @@
 			</button>
 		</buttons>
 		<spinner>
-			cms_page_columns
+			blog_post_columns
 		</spinner>
 		<deps>
 			<dep>
@@ -44,7 +44,7 @@
 			<updateUrl path="mui/index/render" />
 		</settings>
 		<aclResource>
-			HoangCong_Blog::blog_content
+			HoangCong_Blog::post
 		</aclResource>
 		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="blog_post_listing_data_source">
 			<settings>
@@ -65,7 +65,17 @@
 			</sticky>
 		</settings>
 		<bookmark name="bookmarks" />
-		<columnsControls name="columns_controls" />
+		  <exportButton name="export_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">
+					blog_post_listing.blog_post_listing.blog_post_columns.ids
+					</item>
+                </item>
+            </argument>
+        </exportButton>
+		<columnsControls name="columns_controls">
+		</columnsControls>
 		<filterSearch name="fulltext" />
 		<filters name="listing_filters">
 			<argument name="data" xsi:type="array">
@@ -120,7 +130,7 @@
 							Delete items
 						</title>
 					</confirm>
-					<url path="blog/massDelete" />
+					<url path="blog/post/massdelete" />
 					<type>
 						delete
 					</type>
@@ -172,8 +182,8 @@
 		</massaction>
 		<paging name="listing_paging" />
 	</listingToolbar>
-	<columns name="cms_page_columns">
-		<settings>
+	<columns name="blog_post_columns">
+		<!-- <settings>
 			<editorConfig>
 				<param name="clientConfig" xsi:type="array">
 					<item name="saveUrl" xsi:type="url" path="cms/page/inlineEdit" />
@@ -191,7 +201,7 @@
 					blog_post_listing.blog_post_listing.blog_post_columns.ids
 				</param>
 			</editorConfig>
-			<!-- <childDefaults>
+			<childDefaults>
 				<param name="fieldAction" xsi:type="array">
 					<item name="provider" xsi:type="string">
 						cms_page_listing.cms_page_listing.cms_page_columns_editor
@@ -208,8 +218,8 @@
 						</item>
 					</item>
 				</param>
-			</childDefaults> -->
-		</settings>
+			</childDefaults>
+		</settings> -->
 		<selectionsColumn name="ids">
 			<settings>
 				<indexField>
@@ -223,7 +233,7 @@
 				</resizeDefaultWidth>
 			</settings>
 		</selectionsColumn>
-		<column name="post_id">
+		<column name="post_id" >
 			<settings>
 				<filter>
 					textRange
@@ -254,7 +264,7 @@
 				</label>
 			</settings>
 		</column>
-		<column name="post" sortOrder="1">
+		<column name="post" >
 			<settings>
 				<filter>
 					text
@@ -332,7 +342,7 @@
 		</column> -->
 		<column name="is_active" component="Magento_Ui/js/grid/columns/select">
 			<settings>
-				<options class="Magento\Cms\Model\Page\Source\IsActive" />
+				<options class="HoangCong\Blog\Model\Post\Source\IsActive" />
 				<filter>
 					select
 				</filter>
@@ -349,20 +359,8 @@
 				</label>
 			</settings>
 		</column>
-		<column name="creation_time" component="Magento_Ui/js/grid/columns/date">
-			<settings>
-				<filter>
-					dateRange
-				</filter>
-				<dataType>
-					date
-				</dataType>
-				<label translate="true">
-					Created
-				</label>
-			</settings>
-		</column>
-		<column name="update_time"  component="Magento_Ui/js/grid/columns/date">
+		
+		<column  name="update_time"  component="Magento_Ui/js/grid/columns/date" sortOrder="1000">
 			<settings>
 				<filter>
 					dateRange
@@ -375,7 +373,24 @@
 				</label>
 			</settings>
 		</column>
-		<column name="custom_theme_from"  component="Magento_Ui/js/grid/columns/date">
+
+		<column  name="creation_time" component="Magento_Ui/js/grid/columns/date" sortOrder="11221">
+			<settings>
+				<filter>
+					dateRange
+				</filter>
+				<dataType>
+					date
+				</dataType>
+				<label translate="true">
+					Created
+				</label>
+				<resizeDefaultWidth>
+					300
+				</resizeDefaultWidth>
+			</settings>
+		</column>
+		<!-- <column name="custom_theme_from"  component="Magento_Ui/js/grid/columns/date">
 			<settings>
 				<timezone>
 					false
@@ -428,7 +443,7 @@
 					false
 				</visible>
 			</settings>
-		</column>
+		</column> -->
 		<!-- 
 		<column name="custom_theme" component="Magento_Ui/js/grid/columns/select">
 			<settings>
@@ -528,10 +543,10 @@
 				</visible>
 			</settings>
 		</column> -->
-		<actionsColumn name="actions" class="Magento\Cms\Ui\Component\Listing\Column\PageActions">
+		<actionsColumn name="actions" class="HoangCong\Blog\Ui\Component\Listing\Column\PostActions">
 			<settings>
 				<indexField>
-					page_id
+					post_id
 				</indexField>
 				<resizeEnabled>
 					false
@@ -542,4 +557,6 @@
 			</settings>
 		</actionsColumn>
 	</columns>
+
+
 </listing>

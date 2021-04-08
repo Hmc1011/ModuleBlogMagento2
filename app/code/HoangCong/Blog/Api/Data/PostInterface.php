@@ -17,6 +17,8 @@ interface  PostInterface extends ExtensibleDataInterface
     const CREATION_TIME='creation_time';
     const UPDATE_TIME='update_time';
     const IS_ACTIVE='is_active';
+    const STATUS_ENABLED=1;
+    const STATUS_DISABLED=0;
 
     /**
      * @return int

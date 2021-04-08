@@ -5,7 +5,7 @@ namespace HoangCong\Blog\Controller\Adminhtml\Post;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
-class Index extends \Magento\Backend\App\Action
+class NewPost extends \Magento\Backend\App\Action
 {
     protected $resultPageFactory;
     public function __construct(
@@ -19,11 +19,11 @@ class Index extends \Magento\Backend\App\Action
     {
         
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('Admin HoangCong_Blog'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Admin HoangCong_Blog: Create a new post'));
         return $resultPage;
     }
     protected function _isAllowed()
     {   
-            return $this->_authorization->isAllowed('HoangCong_Blog::post');
+            return $this->_authorization->isAllowed('HoangCong_Blog::save');
     }
 }

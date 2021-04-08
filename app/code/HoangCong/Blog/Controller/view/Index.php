@@ -45,29 +45,7 @@ class Index implements HttpGetActionInterface
      */
     public function execute()
     {
-        $urlRewriteModel = $this->_urlRewriteFactory->create();
-        /* set current store id */
-        $urlRewriteModel->setStoreId(1);
-        /* this url is not created by system so set as 0 */
-        $urlRewriteModel->setIsSystem(0);
-        /* unique identifier - set random unique value to id path */
-        // $urlRewriteModel->setIdPath(rand(1, 100000));
-        /* set actual url path to target path field */
-
-        $urlRewriteModel->setTargetPath("blog/". $this->request->getAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS) );
-        /* set requested path which you want to create */
-        $urlRewriteModel->setRequestPath("blog/". $this->request->getAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS).".html" );
-        /* set current store id */
-         try {
-             $urlRewriteModel->save();
-
-         }
-          catch (\Exception $e) 
-          {      
-            \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)
-            ->debug($e->getMessage());            
-              }
-
+      
         return $this->pageFactory->create();
     }
 }
