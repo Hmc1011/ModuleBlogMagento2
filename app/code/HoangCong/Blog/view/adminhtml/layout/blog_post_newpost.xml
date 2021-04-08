@@ -2,7 +2,7 @@
       <update handle="formkey"/>
       <body>
           <referenceContainer name="content">
-              <uiComponent name="blog_post_saving"/>
+              <uiComponent name="post_saving_form"/>
           </referenceContainer>
       </body>
   </page>
