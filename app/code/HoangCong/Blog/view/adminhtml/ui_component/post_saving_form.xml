@@ -88,7 +88,7 @@
 				General
 			</label>
 		</settings>
-		<field name="id" formElement="input">
+		<field name="id" formElement="hidden">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">
@@ -106,65 +106,6 @@
 				<required>false</required>
 			</settings>
 		</field>
-		<!--
-		<field name="parent" formElement="hidden">
-		<argument name="data" xsi:type="array">
-		<item name="config" xsi:type="array">
-		<item name="source" xsi:type="string">
-		post
-		</item>
-		</item>
-		</argument>
-		<settings>
-		<dataType>
-		text
-		</dataType>
-		</settings>
-		</field>
-		-->
-		<!--
-		<field name="path" formElement="hidden">
-		<argument name="data" xsi:type="array">
-		<item name="config" xsi:type="array">
-		<item name="source" xsi:type="string">
-		post
-		</item>
-		</item>
-		</argument>
-		<settings>
-		<dataType>
-		text
-		</dataType>
-		</settings>
-		</field>
-		-->
-		<!--
-		<field name="level" formElement="hidden">
-		<argument name="data" xsi:type="array">
-		<item name="config" xsi:type="array">
-		<item name="source" xsi:type="string">
-		post
-		</item>
-		</item>
-		</argument>
-		</field>
-		-->
-		<!--
-		<field name="store_id" formElement="hidden">
-		<argument name="data" xsi:type="array">
-		<item name="config" xsi:type="array">
-		<item name="source" xsi:type="string">
-		post
-		</item>
-		</item>
-		</argument>
-		<settings>
-		<dataType>
-		number
-		</dataType>
-		</settings>
-		</field>
-		-->
 		<field name="is_active" sortOrder="10" formElement="checkbox">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
@@ -207,51 +148,23 @@
 				</checkbox>
 			</formElements>
 		</field>
-		<!--
-		<field name="include_in_menu" sortOrder="20" formElement="checkbox">
-		<argument name="data" xsi:type="array">
-		<item name="config" xsi:type="array">
-		<item name="source" xsi:type="string">
-		post
-		</item>
-		<item name="default" xsi:type="number">
-		1
-		</item>
-		</item>
-		</argument>
-		<settings>
-		<validation>
-		<rule name="required-entry" xsi:type="boolean">
-		false
-		</rule>
-		</validation>
-		<dataType>
-		boolean
-		</dataType>
-		<label translate="true">
-		Include in Menu
-		</label>
-		</settings>
-		<formElements>
-		<checkbox>
-		<settings>
-		<valueMap>
-		<map name="false" xsi:type="string">
-		0
-		</map>
-		<map name="true" xsi:type="string">
-		1
-		</map>
-		</valueMap>
-		<prefer>
-		toggle
-		</prefer>
-		</settings>
-		</checkbox>
-		</formElements>
-		</field>
-		-->
-		<field name="title" sortOrder="30" formElement="input">
+		
+		<field name="title">
+<argument name="data" xsi:type="array">
+<item name="config" xsi:type="array">
+<item name="dataType" xsi:type="string">text</item>
+<item name="label" xsi:type="string" translate="true">Title</item>
+<item name="formElement" xsi:type="string">input</item>
+<item name="source" xsi:type="string">post_rules</item>
+<item name="dataScope" xsi:type="string">title</item>
+<item name="validation" xsi:type="array">
+<item name="required-entry" xsi:type="boolean">true</item>
+<item name="max_text_length" xsi:type="number">100</item>
+</item>
+</item>
+</argument>
+</field>
+		<!-- <field name="title" sortOrder="30" formElement="input">
 			<settings>
 				<dataType>
 					string
@@ -262,13 +175,16 @@
 				<required>
 					true
 				</required>
+				<dataScope>
+				title
+				</dataScope>
 					<validation>
 					<rule name="required-entry" xsi:type="boolean">
 						true
 					</rule>
 				</validation>
 			</settings>
-		</field>
+		</field> -->
 	</fieldset>
 	<fieldset name="content" sortOrder="10">
 		<settings>
@@ -389,16 +305,6 @@
 				</wysiwyg>
 			</formElements>
 		</field>
-		<!-- <field name="landing_page" sortOrder="60" formElement="select">
-			<settings>
-				<dataType>
-					string
-				</dataType>
-				<label translate="true">
-					Add CMS Block
-				</label>
-			</settings>
-		</field> -->
 	</fieldset>
 	<!-- <fieldset name="display_settings" sortOrder="20">
 		<settings>

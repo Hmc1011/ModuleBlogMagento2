@@ -39,7 +39,7 @@ class PostActions extends Column
         UiComponentFactory $uiComponentFactory,
         Url $urlBuilder,
         $viewUrl = '',
-        $editUrl='edit', 
+        $editUrl='', 
         array $components = [],
         array $data = []
     ) {
@@ -57,7 +57,10 @@ class PostActions extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
-        if (isset($dataSource['data']['items'])) {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $admin_base_url = $objectManager->create('Magento\Backend\Helper\Data')->getHomePageUrl();
+    
+    if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $name = $this->getData('name');
                 if (isset($item['post_id'])) {
@@ -67,7 +70,7 @@ class PostActions extends Column
                         'target' => '_blank',
                         'label' => __('View on Frontend')],
                         'edit'=>[
-                            'href'=> $this->_urlBuilder->getUrl($this->_editUrl, ['id' => $item['post_id']]) ,
+                            'href'=>  $admin_base_url.'/blog/post/'.$item['post_id'] ,
                             'label'=>__('Edit')
                         ],
                         'delete'=>[

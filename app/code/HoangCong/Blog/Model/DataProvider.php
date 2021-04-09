@@ -30,8 +30,12 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      *
      * @return array
      */
-    // public function getData()
-    // {
-    //     return ['name'=>'cong'];
-    // }
+    public function getData()
+    {
+        // $this->collection->filter_id()
+        // var_dump($this->collection->toArray());
+        return [ 1=>['post_id'=>'31','title'=>"Hoangcong" ] ];
+        // $items = $this->getCollection()->toArray();
+        // return $items;       
+    }
 }
