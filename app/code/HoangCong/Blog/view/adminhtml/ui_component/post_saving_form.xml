@@ -23,10 +23,10 @@
 	</argument>
 	<settings>
 		<buttons>
-			<!-- <button name="save" class="Magento\Catalog\Block\Adminhtml\Category\Edit\SaveButton" /> -->
-			<!-- <button name="delete" class="Magento\Catalog\Block\Adminhtml\Category\Edit\DeleteButton" /> -->
-		<button name="add">
-				<url path="*/*/*/submit" />
+			<!-- <button name="save" class="Magento\Catalog\Block\Adminhtml\post\Edit\SaveButton" /> -->
+			<!-- <button name="delete" class="Magento\Catalog\Block\Adminhtml\post\Edit\DeleteButton" /> -->
+			<button name="save">
+				<url path="*/*/*/save" />
 				<class>
 					primary
 				</class>
@@ -37,7 +37,7 @@
 			<button name="back">
 				<url path="*/*/" />
 				<class>
-					secondary
+					back
 				</class>
 				<label translate="true">
 					Back
@@ -84,78 +84,92 @@
 			<collapsible>
 				false
 			</collapsible>
-			<label />
+			<label>
+				General
+			</label>
 		</settings>
-		<field name="id" formElement="hidden">
+		<field name="id" formElement="input">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">
-						category
+						ID
 					</item>
 				</item>
 			</argument>
 			<settings>
+				<label>
+					ID
+				</label>
 				<dataType>
-					text
+					boolean
 				</dataType>
+				<required>false</required>
 			</settings>
 		</field>
+		<!--
 		<field name="parent" formElement="hidden">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">
-						category
-					</item>
-				</item>
-			</argument>
-			<settings>
-				<dataType>
-					text
-				</dataType>
-			</settings>
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="source" xsi:type="string">
+		post
+		</item>
+		</item>
+		</argument>
+		<settings>
+		<dataType>
+		text
+		</dataType>
+		</settings>
 		</field>
+		-->
+		<!--
 		<field name="path" formElement="hidden">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">
-						category
-					</item>
-				</item>
-			</argument>
-			<settings>
-				<dataType>
-					text
-				</dataType>
-			</settings>
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="source" xsi:type="string">
+		post
+		</item>
+		</item>
+		</argument>
+		<settings>
+		<dataType>
+		text
+		</dataType>
+		</settings>
 		</field>
+		-->
+		<!--
 		<field name="level" formElement="hidden">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">
-						category
-					</item>
-				</item>
-			</argument>
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="source" xsi:type="string">
+		post
+		</item>
+		</item>
+		</argument>
 		</field>
+		-->
+		<!--
 		<field name="store_id" formElement="hidden">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">
-						category
-					</item>
-				</item>
-			</argument>
-			<settings>
-				<dataType>
-					number
-				</dataType>
-			</settings>
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="source" xsi:type="string">
+		post
+		</item>
+		</item>
+		</argument>
+		<settings>
+		<dataType>
+		number
+		</dataType>
+		</settings>
 		</field>
+		-->
 		<field name="is_active" sortOrder="10" formElement="checkbox">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">
-						category
+						post
 					</item>
 					<item name="default" xsi:type="number">
 						1
@@ -172,7 +186,7 @@
 					boolean
 				</dataType>
 				<label translate="true">
-					Enable Category
+					Enable post
 				</label>
 			</settings>
 			<formElements>
@@ -193,56 +207,66 @@
 				</checkbox>
 			</formElements>
 		</field>
+		<!--
 		<field name="include_in_menu" sortOrder="20" formElement="checkbox">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">
-						category
-					</item>
-					<item name="default" xsi:type="number">
-						1
-					</item>
-				</item>
-			</argument>
-			<settings>
-				<validation>
-					<rule name="required-entry" xsi:type="boolean">
-						false
-					</rule>
-				</validation>
-				<dataType>
-					boolean
-				</dataType>
-				<label translate="true">
-					Include in Menu
-				</label>
-			</settings>
-			<formElements>
-				<checkbox>
-					<settings>
-						<valueMap>
-							<map name="false" xsi:type="string">
-								0
-							</map>
-							<map name="true" xsi:type="string">
-								1
-							</map>
-						</valueMap>
-						<prefer>
-							toggle
-						</prefer>
-					</settings>
-				</checkbox>
-			</formElements>
+		<argument name="data" xsi:type="array">
+		<item name="config" xsi:type="array">
+		<item name="source" xsi:type="string">
+		post
+		</item>
+		<item name="default" xsi:type="number">
+		1
+		</item>
+		</item>
+		</argument>
+		<settings>
+		<validation>
+		<rule name="required-entry" xsi:type="boolean">
+		false
+		</rule>
+		</validation>
+		<dataType>
+		boolean
+		</dataType>
+		<label translate="true">
+		Include in Menu
+		</label>
+		</settings>
+		<formElements>
+		<checkbox>
+		<settings>
+		<valueMap>
+		<map name="false" xsi:type="string">
+		0
+		</map>
+		<map name="true" xsi:type="string">
+		1
+		</map>
+		</valueMap>
+		<prefer>
+		toggle
+		</prefer>
+		</settings>
+		</checkbox>
+		</formElements>
 		</field>
-		<field name="post_id" sortOrder="30" formElement="input">
+		-->
+		<field name="title" sortOrder="30" formElement="input">
 			<settings>
 				<dataType>
 					string
 				</dataType>
 				<label translate="true">
-					Post id
+					Title
 				</label>
+				<required>
+					true
+				</required>
+					<validation>
+					<rule name="required-entry" xsi:type="boolean">
+						true
+					</rule>
+				</validation>
 			</settings>
 		</field>
 	</fieldset>
@@ -254,12 +278,15 @@
 			<label translate="true">
 				Content
 			</label>
+			<opened>
+				true
+			</opened>
 		</settings>
 		<field name="image" sortOrder="40" formElement="imageUploader">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">
-						category
+						post
 					</item>
 				</item>
 			</argument>
@@ -271,7 +298,7 @@
 					string
 				</dataType>
 				<label translate="true">
-					Category Image
+					Post Thumbnail
 				</label>
 				<visible>
 					true
@@ -287,7 +314,7 @@
 							false
 						</required>
 						<uploaderConfig>
-							<param xsi:type="url" name="url" path="catalog/category_image/upload" />
+							<param xsi:type="url" name="url" path="blog/post/validate" />
 						</uploaderConfig>
 						<previewTmpl>
 							Magento_Catalog/image-preview
@@ -296,7 +323,7 @@
 							Media Gallery
 						</openDialogTitle>
 						<initialMediaGalleryOpenSubpath>
-							catalog/category
+							Blog/post
 						</initialMediaGalleryOpenSubpath>
 						<allowedExtensions>
 							jpg jpeg gif png
@@ -308,14 +335,17 @@
 				</imageUploader>
 			</formElements>
 		</field>
-		<field name="description" template="ui/form/field" sortOrder="50" formElement="wysiwyg">
+		<field name="content" template="ui/form/field" sortOrder="50" formElement="wysiwyg">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="wysiwygConfigData" xsi:type="array">
 						<item name="height" xsi:type="string">
-							100px
+							500px
 						</item>
-						<item name="add_variables" xsi:type="boolean">
+						<item name="width" xsi:type="string">
+							1000px
+						</item>
+						<item name="add_variables" xsi:type="boolean"	>
 							false
 						</item>
 						<item name="add_widgets" xsi:type="boolean">
@@ -329,20 +359,25 @@
 						</item>
 					</item>
 					<item name="source" xsi:type="string">
-						category
+						post
 					</item>
 				</item>
 			</argument>
 			<settings>
 				<label translate="true">
-					Description
+					content
 				</label>
+							<validation>
+					<rule name="required-entry" xsi:type="boolean">
+						true
+					</rule>
+				</validation>
 				<dataScope>
-					description
+					content
 				</dataScope>
 			</settings>
 			<formElements>
-				<wysiwyg class="Magento\Catalog\Ui\Component\Category\Form\Element\Wysiwyg">
+				<wysiwyg class="\Magento\Ui\Component\Form\Element\Wysiwyg">
 					<settings>
 						<rows>
 							8
@@ -354,7 +389,7 @@
 				</wysiwyg>
 			</formElements>
 		</field>
-		<field name="landing_page" sortOrder="60" formElement="select">
+		<!-- <field name="landing_page" sortOrder="60" formElement="select">
 			<settings>
 				<dataType>
 					string
@@ -363,10 +398,9 @@
 					Add CMS Block
 				</label>
 			</settings>
-		</field>
+		</field> -->
 	</fieldset>
-	<!-- 
-	<fieldset name="display_settings" sortOrder="20">
+	<!-- <fieldset name="display_settings" sortOrder="20">
 		<settings>
 			<collapsible>
 				true
@@ -434,7 +468,7 @@
 				<argument name="data" xsi:type="array">
 					<item name="config" xsi:type="array">
 						<item name="source" xsi:type="string">
-							category
+							post
 						</item>
 					</item>
 				</argument>
@@ -463,9 +497,9 @@
 				<formElements>
 					<checkbox>
 						<settings>
-							<description translate="true">
+							<Content translate="true">
 								Use All
-							</description>
+							</Content>
 							<valueMap>
 								<map name="false" xsi:type="boolean">
 									false
@@ -494,7 +528,7 @@
 				<argument name="data" xsi:type="array">
 					<item name="config" xsi:type="array">
 						<item name="source" xsi:type="string">
-							category
+							post
 						</item>
 					</item>
 				</argument>
@@ -523,9 +557,9 @@
 				<formElements>
 					<checkbox>
 						<settings>
-							<description translate="true">
+							<Content translate="true">
 								Use Config Settings
-							</description>
+							</Content>
 							<valueMap>
 								<map name="false" xsi:type="boolean">
 									false
@@ -554,7 +588,7 @@
 				<argument name="data" xsi:type="array">
 					<item name="config" xsi:type="array">
 						<item name="source" xsi:type="string">
-							category
+							post
 						</item>
 					</item>
 				</argument>
@@ -591,9 +625,9 @@
 				<formElements>
 					<checkbox>
 						<settings>
-							<description translate="true">
+							<Content translate="true">
 								Use Config Settings
-							</description>
+							</Content>
 							<valueMap>
 								<map name="false" xsi:type="boolean">
 									false
@@ -632,7 +666,7 @@
 				<argument name="data" xsi:type="array">
 					<item name="config" xsi:type="array">
 						<item name="source" xsi:type="string">
-							category
+							post
 						</item>
 					</item>
 				</argument>
@@ -663,13 +697,13 @@
 				</label>
 			</settings>
 		</field>
-		<field name="meta_description" sortOrder="150" formElement="textarea">
+		<field name="meta_Content" sortOrder="150" formElement="textarea">
 			<settings>
 				<dataType>
 					string
 				</dataType>
 				<label translate="true">
-					Meta Description
+					Meta Content
 				</label>
 			</settings>
 		</field>
@@ -680,12 +714,12 @@
 				true
 			</collapsible>
 			<label translate="true">
-				Products in Category
+				Products in post
 			</label>
 		</settings>
 		<container name="assign_products_container" sortOrder="160">
 			<htmlContent name="html_content">
-				<block name="gallery" class="Magento\Catalog\Block\Adminhtml\Category\AssignProducts" />
+				<block name="gallery" class="Magento\Catalog\Block\Adminhtml\post\AssignProducts" />
 			</htmlContent>
 		</container>
 	</fieldset>
@@ -716,7 +750,7 @@
 					boolean
 				</dataType>
 				<label>
-					Use Parent Category Settings
+					Use Parent post Settings
 				</label>
 			</settings>
 			<formElements>

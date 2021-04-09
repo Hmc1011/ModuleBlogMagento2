@@ -10,14 +10,16 @@ class Index extends \Magento\Framework\App\Action\Action
 * @var \Magento\UrlRewrite\Model\UrlRewriteFactory
 */
 protected $_urlRewriteFactory;
-
+protected $show;
 
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
 		\Magento\Framework\View\Result\PageFactory $pageFactory,
-		\Magento\UrlRewrite\Model\UrlRewriteFactory $urlRewriteFactory		
+		\Magento\UrlRewrite\Model\UrlRewriteFactory $urlRewriteFactory,
+		$show=''
 		)
 	{
+		$this->show= $show;
 		$this->_pageFactory = $pageFactory;
 		$this->_urlRewriteFactory = $urlRewriteFactory;
 
@@ -45,6 +47,7 @@ try {
  {      	}
 
 		$this->_objectManager->get('Psr\Log\LoggerInterface')->debug('toi la cong');
-			return $this->_pageFactory->create();
+	echo($this->show);
+		return $this->_pageFactory->create();
 	}
 }

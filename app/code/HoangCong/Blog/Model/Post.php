@@ -48,6 +48,7 @@ class Post extends AbstractExtensibleModel implements PostInterface
 
     public function setUrlKey($url_key)
     {
+        $this->setData(self::URL_KEY,$url_key);
     }
     public function getUrl()
     {
@@ -55,18 +56,24 @@ class Post extends AbstractExtensibleModel implements PostInterface
     }
     public function setTitle($title)
     {
+        $this->setData(self::TITLE,$title);
     }
     public function setContent($content)
     {
+         $this->setData(self::CONTENT,$content);
     }
     public function setCreationTime($creationTime)
     {
+        $this->setData(self::CREATION_TIME,$creationTime);
     }
     public function setUpdateTime($updateTime)
     {
+        $this->setData(self::UPDATE_TIME,$updateTime);
     }
     public function setIsActive($isActive)
     {
+        if  ($isActive) $this->setData(self::IS_ACTIVE, self::STATUS_ENABLED );
+        else  $this->setData(self::IS_ACTIVE,self::STATUS_DISABLED);
     }
     public function checkUrlKey($url_key)
     {
