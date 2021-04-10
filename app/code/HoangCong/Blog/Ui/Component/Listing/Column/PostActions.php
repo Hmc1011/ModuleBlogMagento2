@@ -5,11 +5,12 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\Url;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Magento\Backend\Model\UrlInterface;
 
 class PostActions extends Column
 {
     /**
-     * @var UrlInterface
+     * @var Url
      */
     protected $_urlBuilder;
 
@@ -23,6 +24,11 @@ class PostActions extends Column
      * @var string
      */
     protected $_editUrl;
+
+    /**
+     * @var Magento\Backend\Model\UrlInterface
+     */
+    protected $_backendUrl;
 
     /**
      * Constructor
@@ -39,10 +45,13 @@ class PostActions extends Column
         UiComponentFactory $uiComponentFactory,
         Url $urlBuilder,
         $viewUrl = '',
-        $editUrl='', 
+        $editUrl='blog/post/edit', 
         array $components = [],
-        array $data = []
+        array $data = [],
+        UrlInterface $backendUrl
+
     ) {
+        $this->_backendUrl= $backendUrl;
         $this->_urlBuilder = $urlBuilder;
         $this->_viewUrl    = $viewUrl;
         $this->_editUrl    = $editUrl;
@@ -57,28 +66,26 @@ class PostActions extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-    $admin_base_url = $objectManager->create('Magento\Backend\Helper\Data')->getHomePageUrl();
-    
     if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $name = $this->getData('name');
+
                 if (isset($item['post_id'])) {
                     $item[$name] = [
                         'view on frontend'=>[
-                        'href'  => $this->_urlBuilder->getUrl($this->_viewUrl, ['blog' => $item['url_key']]),
+                        'href'  => $this->_urlBuilder->getUrl($this->_viewUrl, ['blog'=>$item['url_key']]) ,
                         'target' => '_blank',
                         'label' => __('View on Frontend')],
                         'edit'=>[
-                            'href'=>  $admin_base_url.'/blog/post/'.$item['post_id'] ,
+                            'href'=> $this->_backendUrl->getUrl($this->_editUrl, ['id'=>$item['post_id']]) ,
                             'label'=>__('Edit')
                         ],
                         'delete'=>[
-                            'href'=> $this->_urlBuilder->getUrl('delete', ['id' => $item['post_id']]) ,
+                            'href'=> $this->_backendUrl->getUrl('blog/post/delete', ['id'=>$item['post_id']]) ,
                             'label'=>__('Delete'),
                             'confirm'=>[
-                                'title'=> __('Delete "${ $data.title }" '),
-                                'message'=> __('Are you sure want to delete a "${ $.$data.title }" record?  ')
+                                'title'=> __("Delete ${item['post_id']} "),
+                                'message'=> __("Are you sure want to delete a ${item['title']} record? ")
                             ]
                         ]
 

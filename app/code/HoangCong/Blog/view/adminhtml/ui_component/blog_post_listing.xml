@@ -141,7 +141,7 @@
 			</action>
 			<action name="disable">
 				<settings>
-					<url path="blog/massDisable" />
+					<url path="blog/post/massdisable" />
 					<type>
 						disable
 					</type>
@@ -152,7 +152,7 @@
 			</action>
 			<action name="enable">
 				<settings>
-					<url path="blog/massEnable" />
+					<url path="blog/post/massenable" />
 					<type>
 						enable
 					</type>

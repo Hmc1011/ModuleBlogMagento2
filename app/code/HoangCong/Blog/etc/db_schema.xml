@@ -13,4 +13,26 @@
         <column name="post_id"/>
     </constraint>
 </table>
+
+<table name="hoangcong_blog_comment_post" resource="default" engine="innodb" 
+    comment="This table declare relations of comments with posts in module HoangCong_Blog ">
+    <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="ID"/>
+    <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" comment="Post ID refer Post Id"/>
+    <column xsi:type="int" name="comment_id" padding="11" unsigned="false" nullable="false" comment="Comment ID refer comment content"/>
+    <constraint xsi:type="foreign"  table="hoangcong_blog_comment_post" column="post_id" referenceTable="hoangcong_blog" referenceColumn="post_id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign"  table="hoangcong_blog_comment_post" column="comment_id" referenceTable="hoangcong_blog_comment" referenceColumn="comment_id" onDelete="CASCADE"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="id"/>
+    </constraint>
+</table>
+
+<table name="hoangcong_blog_comment" resource="default" engine="innodb" 
+    comment="comments in module HoangCong_Blog ">
+    <column xsi:type="int" name="comment_id" padding="11" unsigned="false" nullable="false" identity="true" comment="comment ID"/>
+    <column xsi:type="text" name="content"  nullable="true" comment="Content of the comment"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="comment_id"/>
+    </constraint>
+</table>
+
 </schema>

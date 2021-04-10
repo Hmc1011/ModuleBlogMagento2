@@ -101,9 +101,10 @@
 					ID
 				</label>
 				<dataType>
-					boolean
+					number
 				</dataType>
 				<required>false</required>
+				<dataScope>post_id</dataScope>
 			</settings>
 		</field>
 		<field name="is_active" sortOrder="10" formElement="checkbox">
@@ -149,22 +150,8 @@
 			</formElements>
 		</field>
 		
-		<field name="title">
-<argument name="data" xsi:type="array">
-<item name="config" xsi:type="array">
-<item name="dataType" xsi:type="string">text</item>
-<item name="label" xsi:type="string" translate="true">Title</item>
-<item name="formElement" xsi:type="string">input</item>
-<item name="source" xsi:type="string">post_rules</item>
-<item name="dataScope" xsi:type="string">title</item>
-<item name="validation" xsi:type="array">
-<item name="required-entry" xsi:type="boolean">true</item>
-<item name="max_text_length" xsi:type="number">100</item>
-</item>
-</item>
-</argument>
-</field>
-		<!-- <field name="title" sortOrder="30" formElement="input">
+
+		<field name="title" sortOrder="30" formElement="input">
 			<settings>
 				<dataType>
 					string
@@ -184,7 +171,8 @@
 					</rule>
 				</validation>
 			</settings>
-		</field> -->
+		</field>
+		
 	</fieldset>
 	<fieldset name="content" sortOrder="10">
 		<settings>
@@ -289,7 +277,7 @@
 					</rule>
 				</validation>
 				<dataScope>
-					content
+					post
 				</dataScope>
 			</settings>
 			<formElements>
@@ -306,25 +294,31 @@
 			</formElements>
 		</field>
 	</fieldset>
-	<!-- <fieldset name="display_settings" sortOrder="20">
+	
+<fieldset name="url" sortOrder="20">
 		<settings>
 			<collapsible>
 				true
 			</collapsible>
 			<label translate="true">
-				Display Settings
+				Url
 			</label>
 		</settings>
-		<field name="display_mode" sortOrder="70" formElement="select">
+		<field name="url_key" sortOrder="70" formElement="input">
 			<settings>
 				<dataType>
 					string
 				</dataType>
 				<label translate="true">
-					Display Mode
+					Url_Key
 				</label>
+				<dataScope>
+				url_key
+				</dataScope>
 			</settings>
 		</field>
+</fieldset>
+<!--
 		<field name="is_anchor" sortOrder="80" formElement="checkbox">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">

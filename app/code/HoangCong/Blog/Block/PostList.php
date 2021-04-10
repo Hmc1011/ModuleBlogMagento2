@@ -47,18 +47,7 @@ class PostList extends \Magento\Framework\View\Element\Template
 
 	public function getPosts()
 	{
-	// 	$filter1 = $this->filterBuilder->setField('*')
-	// 	->create();
-
-	// $filter2 = $this->filterBuilder->setField('member')
-	// 	->setValue('')
-	// 	->setConditionType('eq')
-	// 	->create();
-
-	// $filterOr = $this->filterGroupBuilder
-	// 	->addFilter($filter1)
-	// 	->create();
-	// $this->searchCriteriaBuilder->setFilterGroups([$filterOr]);
+	$this->searchCriteriaBuilder->addFilter('is_active',PostInterface::STATUS_ENABLED);
 	$posts = $this->postRepository->getList($this->searchCriteriaBuilder->create())->getItems();
 	return  $posts;
 	}

@@ -13,6 +13,18 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $this->_init('hoangcong_blog', 'post_id');
     }
+
+    public function enable($post)
+    {
+            $post->setIsActive(true);
+            $post->save();
+    } 
+
+    public function disable($post)
+    {
+            $post->setIsActive(false);
+            $post->save();
+    } 
     public function checkUrlKey($url_key)
     {
         ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)->debug($url_key);

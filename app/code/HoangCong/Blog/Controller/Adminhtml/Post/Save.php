@@ -1,4 +1,5 @@
 <?php
+
 namespace HoangCong\Blog\Controller\Adminhtml\Post;
 
 use Magento\Backend\App\Action;
@@ -29,7 +30,8 @@ class Save extends Action implements HttpPostActionInterface
      * @var \HoangCong\Blog\Api\PostRepositoryInterface
      */
     private $postRepository;
-
+    protected $date;
+    protected $_urlRewriteFactory;
     private $form;
     /**
      * Constructor
@@ -38,17 +40,17 @@ class Save extends Action implements HttpPostActionInterface
      * @param \HoangCong\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory
      * @param \HoangCong\Blog\Api\PostRepositoryInterface $postRepository
      */
-
-     protected $date;
     public function __construct(
         Context $context,
         CollectionFactory $collectionFactory,
         PostRepositoryInterface $postRepository,
-        Form $form
+        Form $form,
+        \Magento\UrlRewrite\Model\UrlRewriteFactory $urlRewriteFactory
     ) {
         $this->collectionFactory = $collectionFactory;
         $this->postRepository = $postRepository;
-        $this->form= $form;
+        $this->form = $form;
+        $this->_urlRewriteFactory = $urlRewriteFactory;
         parent::__construct($context);
     }
 
@@ -62,32 +64,65 @@ class Save extends Action implements HttpPostActionInterface
         if (!$this->getRequest()->isPost()) {
             throw new NotFoundException(__('Page not found'));
         }
-
-        $data=$this->getRequest()->getPostValue();
-        $debug= ObjectManager::getInstance()->create(\Psr\Log\LoggerInterface::class);
-        $debug->debug(json_encode($data));        
+        $data = $this->getRequest()->getPostValue();
+        $debug = ObjectManager::getInstance()->create(\Psr\Log\LoggerInterface::class);
+        $debug->debug(json_encode($data));
         /**@var \HoangCong\Blog\Model\Post*/
 
-        $post= ObjectManager::getInstance()->create(\HoangCong\Blog\Model\Post::class);
+        $post = ObjectManager::getInstance()->create(\HoangCong\Blog\Model\Post::class);
+        $date = ObjectManager::getInstance()->create(DateTime::class)->gmtDate();
+        if (!empty(trim($data['post_id']))) {
+            $post->setId($data['post_id']);
+            $post->setUpdateTime($date);
+        } else {
+            $post->setCreationTime($date);
+        }
         $post->setTitle($data['title']);
-        $post->setContent($data['content']);
+        $post->setContent($data['post']);
         $post->setIsActive(boolval($data['is_active']));
-        $date= ObjectManager::getInstance()->create(DateTime::class)->gmtDate();
-        $post->setCreationTime( $date);
-        $this->postRepository->save($post);
-
         // $debug->debug(print_r($post->debug()));
 
-        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('blog/post');
+        $urlRewriteModel = $this->_urlRewriteFactory->create();
+        /* set current store id */
+        $urlRewriteModel->setStoreId(1);
+        /* this url is not created by system so set as 0 */
+        $urlRewriteModel->setIsSystem(0);
+        /* unique identifier - set random unique value to id path */
+        // $urlRewriteModel->setIdPath(rand(1, 100000));
+        /* set actual url path to target path field */
+        $slug = \Transliterator::createFromRules(
+            ':: Any-Latin;'
+                . ':: NFD;'
+                . ':: [:Nonspacing Mark:] Remove;'
+                . ':: NFC;'
+                . ':: [:Punctuation:] Remove;'
+                . ':: Lower();'
+                . '[:Separator:] > \'-\''
+        )->transliterate($data['title']);
+
+        $data['url_key'] = empty(trim($data['url_key'])) ? $slug : $data['url_key'] ;
+
+        $urlRewriteModel->setTargetPath('blog/' . $data['url_key']);
+        /* set requested path which you want to create */
+        $urlRewriteModel->setRequestPath($data['url_key'].".html");
+        /* */
+        try {
+            $urlRewriteModel->save();
+        } catch (\Exception $e) {
+            \Magento\Framework\App\ObjectManager::getInstance()->get(\Psr\Log\LoggerInterface::class)
+                ->debug($e->getMessage());
+        }
+
+        $post->setUrlKey($data['url_key']);
+        $this->postRepository->save($post);
+        $this->messageManager->addSuccessMessage(
+            __('you have successfully saved the post ')
+        );
+        return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath($this->_redirect->getRefererUrl() );
 
     }
     protected function _isAllowed()
     {
-            return $this->_authorization->isAllowed('HoangCong_Blog::save');
+        return $this->_authorization->isAllowed('HoangCong_Blog::save');
     }
 }
-
-
-
-
-

@@ -54,6 +54,18 @@ public function save(PostInterface $post)
     $post->getResource()->save($post);
     return $post;
 }
+
+
+public function disable(PostInterface $post)
+{
+    $post->getResource()->disable($post);
+}
+
+
+public function enable(PostInterface $post)
+{
+    $post->getResource()->enable($post);
+}
  
 public function delete(PostInterface $post)
 {
