@@ -4,6 +4,7 @@
     <referenceContainer name="content">
         <block class="HoangCong\Blog\Block\DetailPost" name="hoangcongblogdetailpost" template="HoangCong_Blog::detailpost.phtml"/>
         <block class="HoangCong\Blog\Block\Comments" name="hoangcongblogallcomments" template="HoangCong_Blog::commentlist.phtml"/>
+        <block class="HoangCong\Blog\Block\CommentForm" name="hoangcongblogcommentform" template="HoangCong_Blog::commentform.phtml"/>
     </referenceContainer>
 </body>
 </page>
