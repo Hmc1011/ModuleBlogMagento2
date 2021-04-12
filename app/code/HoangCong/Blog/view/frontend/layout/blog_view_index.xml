@@ -3,6 +3,7 @@
 <body>
     <referenceContainer name="content">
         <block class="HoangCong\Blog\Block\DetailPost" name="hoangcongblogdetailpost" template="HoangCong_Blog::detailpost.phtml"/>
+        <block class="HoangCong\Blog\Block\Comments" name="hoangcongblogallcomments" template="HoangCong_Blog::commentlist.phtml"/>
     </referenceContainer>
 </body>
 </page>

@@ -1,0 +1,17 @@
+<b>
+comments:
+</b> 
+<br>
+<ul>
+<?php
+foreach ($block->getComments() as $comment)
+{
+    echo "<li> <b> ${comment['lastname']}:</b>  <span>  ${comment['comment']} </span></li>";
+}
+?>
+</ul>
+
+<form action="">
+<textarea placeholder="comment here"></textarea>
+<button> submit</button>
+</form>

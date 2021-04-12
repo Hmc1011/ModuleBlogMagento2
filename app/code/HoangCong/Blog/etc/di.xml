@@ -3,6 +3,8 @@
     <preference for="HoangCong\Blog\Api\PostRepositoryInterface" type="HoangCong\Blog\Model\PostRepository"/>
     <preference for="HoangCong\Blog\Api\Data\PostInterface" type="HoangCong\Blog\Model\Post"/>
     <preference for="HoangCong\Blog\Api\Data\PostSearchResultInterface" type="HoangCong\Blog\Model\PostSearchResult"/>
+    <preference for="HoangCong\Blog\Api\CommentRepositoryInterface" type="HoangCong\Blog\Model\CommentRepository"/>
+    
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
