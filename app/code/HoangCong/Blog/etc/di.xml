@@ -19,4 +19,33 @@
             <argument name="resourceModel" xsi:type="string">HoangCong\Blog\Model\ResourceModel\Post</argument>
         </arguments>
     </virtualType>
+     <!-- <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_comment_listing_data_source" xsi:type="string">HoangCong\Blog\Model\ResourceModel\Comment\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="HoangCong\Blog\Model\ResourceModel\Comment\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hoangcong_blog_comment</argument>
+            <argument name="resourceModel" xsi:type="string">HoangCong\Blog\Model\ResourceModel\Comment</argument>
+        </arguments>
+    </virtualType> -->
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_comment_listing_data_source" xsi:type="string">HoangCong\Blog\Model\ResourceModel\Comment\Grid\Collection</item>
+            </argument>
+        </arguments>
+</type>
+<type name="HoangCong\Blog\Model\ResourceModel\Comment\Grid\Collection">
+    <arguments>
+        <argument name="mainTable" xsi:type="string">hoangcong_blog_comment</argument>
+        <!-- <argument name="eventPrefix" xsi:type="string">namespace_modulename_grid_collection</argument> -->
+        <!-- <argument name="eventObject" xsi:type="string">namespace_grid_collection</argument> -->
+        <argument name="resourceModel" xsi:type="string">HoangCong\Blog\Model\ResourceModel\Comment</argument>
+    </arguments>
+</type>
 </config>

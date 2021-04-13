@@ -7,7 +7,8 @@
 					<resource id="HoangCong_Blog::blog_content" title="Blog" sortOrder="10">
 						<resource id="HoangCong_Blog::post" title="Blog Posts" sortOrder="40">
 							<resource id="HoangCong_Blog::save" title="Save Blog Posts" />
-							<resource id="HoangCong_Blog::post_delete" title="Delete Blog Post" />
+							<resource id="HoangCong_Blog::post_delete" title="Deletion of Blog Post" />
+							<resource id="HoangCong_Blog::comment" title="Comments of Blog Post" />
 						</resource>
 					</resource>
 				</resource>

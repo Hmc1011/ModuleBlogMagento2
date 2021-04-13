@@ -39,7 +39,6 @@ class CommentRepository implements CommentRepositoryInterface
          */
        $comment= $this->commentFactory->create();
        return $comment->getAllCommentOfPost($post_id);
-
     }
 
     
@@ -53,6 +52,16 @@ class CommentRepository implements CommentRepositoryInterface
         {
             return false;
         }
+    }
+
+
+    public function getAllComment()
+    {
+        /**
+         * @var Comment $comment
+         */
+        $comment= $this->commentFactory->create();
+        return $comment->getAllComment(); 
     }
 
 }

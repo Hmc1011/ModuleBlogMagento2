@@ -53,10 +53,10 @@ protected $commentRepository;
 		if ($customer_id==null) return null;
 		
 		$data= $this->_request->getPostValue();
-		$post_id= $data['id'];
+		$post_id= (int)trim($data['id']);
 		$content= $data['comment'];
 		$content= htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
-		
+
 		// if (empty(trim($content))) return null;
 		$this->comment->setContentComment($content);
 		$this->comment->customer_id= $customer_id;

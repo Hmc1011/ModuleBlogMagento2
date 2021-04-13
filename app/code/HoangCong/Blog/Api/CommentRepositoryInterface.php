@@ -21,4 +21,9 @@ interface  CommentRepositoryInterface
    */
   public function save($comment);
   
+  /**
+   * @return array
+   */
+  public function getAllComment();
+
 }

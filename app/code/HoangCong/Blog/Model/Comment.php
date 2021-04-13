@@ -30,6 +30,10 @@ class Comment extends AbstractExtensibleModel implements CommentInterface
     {
          return   $this->getResource()->getAllCommentOfPost($post_id);
     }
+    public function getAllComment()
+    {
+        return   $this->getResource()->getAllComment();
+    }
 
     public function setContentComment($content){
          $this->setData(self::COMMENT_CONTENT,$content);

@@ -2,6 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
 	<menu>
 		<add id="HoangCong_Blog::blog_content" title="Blog" module="HoangCong_Blog" parent="Magento_Backend::content" sortOrder="50" resource="HoangCong_Blog::blog_content" />
-		<add id="HoangCong_Blog::post" title="Posts" module="HoangCong_Blog" parent="HoangCong_Blog::blog_content" sortOrder="0" action="blog/post" resource="HoangCong_Blog::post" />
+		<add id="HoangCong_Blog::post" title="Posts" module="HoangCong_Blog" parent="HoangCong_Blog::blog_content" sortOrder="100" action="blog/post" resource="HoangCong_Blog::post" />
+		<add id="HoangCong_Blog::comment" title="Comments" module="HoangCong_Blog" parent="HoangCong_Blog::blog_content" sortOrder="110" action="blog/comment" resource="HoangCong_Blog::comment" />
 	</menu>
 </config>

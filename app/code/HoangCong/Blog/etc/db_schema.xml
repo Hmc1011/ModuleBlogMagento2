@@ -30,6 +30,8 @@
     comment="comments in module HoangCong_Blog ">
     <column xsi:type="int" name="comment_id" padding="10" unsigned="true" nullable="false" identity="true" comment="comment ID"/>
     <column xsi:type="text" name="comment"  nullable="true" comment="Content of the comment"/>
+    <column xsi:type="smallint" name="is_active" padding="2" unsigned="true" nullable="false" default='0' identity="false" comment="define comment showable"/>
+     <column xsi:type="datetime" name="creation_time" on_update="false" nullable="true" comment="Creation time of the comment"/>
     <constraint xsi:type="primary" referenceId="PRIMARY">
         <column name="comment_id"/>
     </constraint>
