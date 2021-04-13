@@ -12,6 +12,7 @@ interface  CommentInterface extends ExtensibleDataInterface
 {
     const COMMENT_ID='comment_id';
     const COMMENT_CONTENT='comment';
+  
 
     /**
      * @return int

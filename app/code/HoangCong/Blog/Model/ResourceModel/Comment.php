@@ -3,6 +3,8 @@ namespace HoangCong\Blog\Model\ResourceModel;
 
 use Magento\Framework\App\ObjectManager;
 
+use function PHPUnit\Framework\throwException;
+
 /**
  * Class Comment
  * @package HoangCong\Blog\Model\ResourceModel
@@ -39,4 +41,16 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $colResult;
         
     }
+
+    public function saveCustomerAndPost($customer_id,$post_id,$comment_id)
+    {
+
+            $connection = $this->getConnection();
+            echo $comment_id;
+            echo $post_id;
+            $connection->insertArray(self::COMMENT_POST,['comment_id','post_id'],[[$comment_id,$post_id]] );
+            $connection->insertArray(self::CUSTOMER_COMMENT,['customer_id','comment_id'],[[$customer_id,$comment_id]]);
+    
+    }
+
 }

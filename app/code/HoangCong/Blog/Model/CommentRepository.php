@@ -42,4 +42,17 @@ class CommentRepository implements CommentRepositoryInterface
 
     }
 
+    
+    public function save($comment)
+    {
+        /**@var \HoangCong\Blog\Model\Comment $comment */
+        try{
+            return  $comment->save();       
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
 }

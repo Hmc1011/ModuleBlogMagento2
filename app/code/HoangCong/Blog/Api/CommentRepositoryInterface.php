@@ -1,7 +1,6 @@
 <?php
 namespace HoangCong\Blog\Api;
 
-use Magento\Framework\Api\SearchCriteriaInterface;
 use HoangCong\Blog\Api\Data\CommentInterface;
 
 /**
@@ -12,8 +11,14 @@ interface  CommentRepositoryInterface
 {
  
   /**
-   * @var int $post_id
+   * @param int $post_id
+   * @return array
    */
   public function getAllCommentOfPost($post_id);
+
+  /**
+   * @param CommentInterface $comment
+   */
+  public function save($comment);
   
 }

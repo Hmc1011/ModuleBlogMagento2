@@ -28,8 +28,6 @@ class CommentForm extends \Magento\Framework\View\Element\Template
 	}
     public function customerLoged()
     {
-            var_dump($this->session->isLoggedIn());
-            return $this->session->isLoggedIn();
         $om = \Magento\Framework\App\ObjectManager::getInstance();
         /** @var \Magento\Framework\App\Http\Context $context */
         $context = $om->get('Magento\Framework\App\Http\Context');

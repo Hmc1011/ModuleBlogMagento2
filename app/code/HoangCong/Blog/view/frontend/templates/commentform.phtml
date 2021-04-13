@@ -5,32 +5,36 @@ if  ($block->customerLoged())
 
 <form id="comment-form" action="">
 <input name="id" hidden value="<?php echo $block->getPostId();  ?>" type="text" >
-<textarea class="comment-area" placeholder="comment here"></textarea>
+<textarea class="comment-area" required placeholder="comment here"></textarea>
 <button id="comment-submit" class="submit"> submit</button>
 </form>
-
+<div id="status-comment" class="status"> </div>
 <script type="text/javascript">
 
 require(['jquery'], function($){
 $(function(){
     $(document).on('click','#comment-submit', function(e){
                     e.preventDefault()
+                    $('#status-comment.status').html('');
                     comment= $('#comment-form .comment-area').val()
-                    $.ajax({
-                        type: "POST",
-                        url: "  <?php  echo $block->getUrlAjax();  ?> ",
-                        data: { comment : comment,
-                        id: $("#comment-form input[name='id']").val()
-                        },
-                        success: function (response) {
-                                alert(response)
+                    if (comment.trim() !='')
+                    {
+                        $.ajax({
+                            type: "POST",
+                            url: "  <?php  echo $block->getUrlAjax();  ?> ",
+                            data: { comment : comment,
+                                id: $("#comment-form input[name='id']").val()
+                            },
+                            success: function (response) {
+                                $('#status-comment.status').html(response);
                                 $('#comment-form .comment-area').val('')
-                        },
-                        error : function()
-                        {
-                            alert('fail')
-                        }
-                    });
+                            },
+                            error : function()
+                            {
+                                alert('fail')
+                            }
+                        });
+                    }
 
     })} )
 })

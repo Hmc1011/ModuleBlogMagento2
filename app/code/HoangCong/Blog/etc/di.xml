@@ -4,6 +4,7 @@
     <preference for="HoangCong\Blog\Api\Data\PostInterface" type="HoangCong\Blog\Model\Post"/>
     <preference for="HoangCong\Blog\Api\Data\PostSearchResultInterface" type="HoangCong\Blog\Model\PostSearchResult"/>
     <preference for="HoangCong\Blog\Api\CommentRepositoryInterface" type="HoangCong\Blog\Model\CommentRepository"/>
+    <preference for="HoangCong\Blog\Api\Data\CommentInterface" type="HoangCong\Blog\Model\Comment"/>
     
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
