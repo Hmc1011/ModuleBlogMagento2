@@ -2,6 +2,7 @@
 namespace HoangCong\Blog\Model\ResourceModel;
 
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Model\AbstractModel;
 
 use function PHPUnit\Framework\throwException;
 
@@ -61,12 +62,22 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         
     }
 
+    public function enable($comment)
+    {
+            $comment->setIsActive(true);
+            $comment->saveWhenUpdate();
+    } 
+
+    public function disable($comment)
+    {
+            $comment->setIsActive(false);
+            $comment->saveWhenUpdate();
+    } 
+
     public function saveCustomerAndPost($customer_id,$post_id,$comment_id)
     {
 
             $connection = $this->getConnection();
-            echo $comment_id;
-            echo $post_id;
             $connection->insertArray(self::COMMENT_POST,['comment_id','post_id'],[[$comment_id,$post_id]] );
             $connection->insertArray(self::CUSTOMER_COMMENT,['customer_id','comment_id'],[[$customer_id,$comment_id]]);
     

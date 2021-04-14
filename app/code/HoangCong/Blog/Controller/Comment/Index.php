@@ -1,9 +1,11 @@
 <?php
 namespace HoangCong\Blog\Controller\Comment;
 
+use \Magento\Framework\Stdlib\DateTime\DateTime;
 use HoangCong\Blog\Api\Data\CommentInterface;
 use Magento\Customer\Model\Session;
 use HoangCong\Blog\Api\CommentRepositoryInterface;
+use Magento\Framework\App\ObjectManager;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -61,6 +63,10 @@ protected $commentRepository;
 		$this->comment->setContentComment($content);
 		$this->comment->customer_id= $customer_id;
 		$this->comment->post_id = $post_id;
+		
+        $date = ObjectManager::getInstance()->create(DateTime::class)->gmtDate();
+		$this->comment->setCreationTime($date);
+
 
 		if  ($this->commentRepository->save($this->comment))
 		echo "<b style='color:green;'> Successfully added, please wait for the admin to process</b>";

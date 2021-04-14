@@ -39,10 +39,22 @@ class Comment extends AbstractExtensibleModel implements CommentInterface
          $this->setData(self::COMMENT_CONTENT,$content);
     }
 
+    public function setCreationTime($date){
+        $this->setData(self::CREATION_TIME,$date);
+   }
+    public function setIsActive($isActive)
+    {
+        if  ($isActive) $this->setData(self::IS_ACTIVE, self::STATUS_ENABLED );
+        else  $this->setData(self::IS_ACTIVE,self::STATUS_DISABLED);
+    }
+
+    public function saveWhenUpdate()
+    {
+        parent::save();
+    }
     public function save(){
             parent::save();
             $comment_id= $this->getData(self::COMMENT_ID);
-            echo $comment_id;
             $this->getResource()->saveCustomerAndPost($this->customer_id,$this->post_id,$comment_id);
             return true;
 

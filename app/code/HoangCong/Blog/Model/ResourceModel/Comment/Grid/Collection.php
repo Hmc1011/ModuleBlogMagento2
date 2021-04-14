@@ -4,6 +4,8 @@ namespace HoangCong\Blog\Model\ResourceModel\Comment\Grid;
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Search\AggregationInterface;
 use HoangCong\Blog\Model\ResourceModel\Comment\Collection as ModulenameCollection;
+use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult;
+use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
 
 /**
  * Class Collection
@@ -86,6 +88,8 @@ class Collection extends ModulenameCollection implements SearchResultInterface
     ) {
         return $this;
     }
+
+
 
     /**
      * Get total count.

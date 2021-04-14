@@ -26,4 +26,23 @@ interface  CommentRepositoryInterface
    */
   public function getAllComment();
 
+    /**
+     * @param \HoangCong\Blog\Api\Data\CommentInterface $post
+     * @return void
+     */
+    public function delete(CommentInterface $post);
+
+
+     /**
+     * @param \HoangCong\Blog\Api\Data\CommentInterface $post
+     *
+     */
+    public function enable(CommentInterface $post);
+
+     /**
+     * @param \HoangCong\Blog\Api\Data\CommentInterface $post
+     * 
+     */
+    public function disable(CommentInterface $post);
+
 }

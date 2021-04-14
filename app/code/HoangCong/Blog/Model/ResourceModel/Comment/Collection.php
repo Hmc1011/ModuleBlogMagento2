@@ -25,6 +25,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
+        $this->_init(
+            \HoangCong\Blog\Model\Comment::class,
+            \HoangCong\Blog\Model\ResourceModel\Comment::class
+        );
         parent::__construct(
             $entityFactory, $logger, $fetchStrategy, $eventManager, $connection,
             $resource
@@ -46,12 +50,32 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         parent::_initSelect();
         $tableName='main_table';
-        $this->getSelect()
-            ->join(self::COMMENT_POST,self::COMMENT_POST.'.comment_id='.$tableName.'.comment_id',['comment_id','post_id'])
+        $debug= \Magento\Framework\App\ObjectManager::getInstance()->create(\Psr\Log\LoggerInterface::class);
+        $debug->debug($this->getSelect()->__toString());
+        
+            $this->getSelect()
+            ->join(self::COMMENT_POST,self::COMMENT_POST.'.comment_id='.$tableName.'.comment_id',['post_id'])
             ->join(self::BLOG_POST,self::BLOG_POST.'.post_id='.self::COMMENT_POST.'.post_id',['title'] )
-            ->join(self::CUSTOMER_COMMENT,self::CUSTOMER_COMMENT.'.comment_id='.self::COMMENT_POST.'.comment_id','customer_id')
-            ->join(self::CUSTOMER_ENTITY,self::CUSTOMER_ENTITY.'.entity_id='.self::CUSTOMER_COMMENT.'.customer_id',['firstname','middlename','lastname','entity_id']);
-        return $this;
+            ->join(self::CUSTOMER_COMMENT,self::CUSTOMER_COMMENT.'.comment_id='.self::COMMENT_POST.'.comment_id',['customer_id'])
+            ->join(self::CUSTOMER_ENTITY,self::CUSTOMER_ENTITY.'.entity_id='.self::CUSTOMER_COMMENT.'.customer_id',['firstname','middlename','lastname','entity_id'])
+            
+    ;
+            return $this;
     }
+
+    
+  /**
+     * Build sql where condition part
+     *
+     * @param   string|array $field
+     * @param   null|string|array $condition
+     * @return  string
+     */
+    protected function _translateCondition($field, $condition)
+    {
+        $field = 'main_table.'.$this->_getMappedField($field);
+        return $this->_getConditionSql($this->getConnection()->quoteIdentifier($field), $condition);
+    }
+
 }
 

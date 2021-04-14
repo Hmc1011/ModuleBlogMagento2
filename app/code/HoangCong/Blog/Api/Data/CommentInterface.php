@@ -12,7 +12,11 @@ interface  CommentInterface extends ExtensibleDataInterface
 {
     const COMMENT_ID='comment_id';
     const COMMENT_CONTENT='comment';
-  
+    const IS_ACTIVE='is_active';
+    const STATUS_ENABLED=1;
+    const STATUS_DISABLED=0;
+    const CREATION_TIME='creation_time';
+
 
     /**
      * @return int
@@ -25,5 +29,9 @@ interface  CommentInterface extends ExtensibleDataInterface
       */
     public  function getAllCommentOfPost($post_id);
 
+    /**
+     * @var \DateTime $date
+     */
+    public function setCreationTime($date);
 
 }

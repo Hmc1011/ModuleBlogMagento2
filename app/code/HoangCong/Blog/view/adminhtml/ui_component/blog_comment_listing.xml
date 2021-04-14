@@ -46,7 +46,7 @@
 		<aclResource>
 			HoangCong_Blog::comment
 		</aclResource>
-		<dataProvider class="HoangCong\Blog\Model\DataCommentProvider" name="blog_comment_listing_data_source">
+		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="blog_comment_listing_data_source">
 			<settings>
 				<requestFieldName>
 					id
@@ -245,7 +245,7 @@
 			</settings>
 		</column>
 
-	<!-- <column name="customer">
+<column name="entity_id">
 			<settings>
 				<filter>
 					text
@@ -261,10 +261,52 @@
 					</editorType>
 				</editor>
 				<label translate="true">
-					Customer
+					Customer ID
 				</label>
 			</settings>
-		</column> -->
+		</column>
+			
+<column name="firstname">
+			<settings>
+				<filter>
+					text
+				</filter>
+				<editor>
+					<validation>
+						<rule name="validate-identifier" xsi:type="boolean">
+							true
+						</rule>
+					</validation>
+					<editorType>
+						text
+					</editorType>
+				</editor>
+				<label translate="true">
+					Customer Firstname
+				</label>
+			</settings>
+		</column>
+
+	<column name="lastname">
+			<settings>
+				<filter>
+					text
+				</filter>
+				<editor>
+					<validation>
+						<rule name="validate-identifier" xsi:type="boolean">
+							true
+						</rule>
+					</validation>
+					<editorType>
+						text
+					</editorType>
+				</editor>
+				<label translate="true">
+					Customer Lastname
+				</label>
+			</settings>
+		</column>
 
 		<column name="comment" >
 			<settings>
@@ -286,8 +328,8 @@
 				</label>
 			</settings>
 		</column>
-<!-- 
-		<column name="post" >
+
+		<column name="title" >
 			<settings>
 				<filter>
 					text
@@ -306,7 +348,7 @@
 					Post title
 				</label>
 			</settings>
-		</column> -->
+		</column>
 
 	
 

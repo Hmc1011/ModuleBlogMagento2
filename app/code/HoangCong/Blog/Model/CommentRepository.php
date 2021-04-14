@@ -64,4 +64,21 @@ class CommentRepository implements CommentRepositoryInterface
         return $comment->getAllComment(); 
     }
 
+
+public function disable(CommentInterface $comment)
+{
+    $comment->getResource()->disable($comment);
+}
+
+
+public function enable(CommentInterface $comment)
+{
+    $comment->getResource()->enable($comment);
+}
+ 
+public function delete(CommentInterface $comment)
+{
+    $comment->getResource()->delete($comment);
+}
+
 }

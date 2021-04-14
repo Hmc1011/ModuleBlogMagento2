@@ -24,7 +24,7 @@ interface  PostRepositoryInterface
     public function save(PostInterface $post);
 
   /**
-     * @param \VinaiKopp\Kitchen\Api\Data\PostInterface $post
+     * @param \HoangCong\Blog\Api\Data\PostInterface $post
      * @return void
      */
     public function delete(PostInterface $post);
