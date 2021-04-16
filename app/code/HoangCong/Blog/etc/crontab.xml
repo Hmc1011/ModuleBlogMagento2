@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-<group id="default">
+<group id="hoangcong_blog">
 <job name="hoangcong_blog_comment_mail_to_admin"
 instance="HoangCong\Blog\Model\Cron"
 method="sendMailToAdminWhenAppearNewComment">
-<schedule>* * * * *</schedule>
+<schedule>30 8 * * *</schedule>
 </job>
 </group>
 </config>

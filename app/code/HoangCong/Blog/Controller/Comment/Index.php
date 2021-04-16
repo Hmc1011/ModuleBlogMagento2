@@ -14,9 +14,14 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Mageplaza\Smtp\Mail\Rse\Mail;
+use Magento\Authorization\Model\Role;
+use Magento\Authorization\Model\Rules;
+use Magento\User\Api\Data\UserInterfaceFactory;
+use Magento\User\Model\User;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
+	const RULE=['HoangCong_Blog::comment','Magento_Backend::all'];
 	protected $_pageFactory;
 
 	protected \Magento\UrlRewrite\Model\UrlRewrite $k;
@@ -31,7 +36,15 @@ class Index extends \Magento\Framework\App\Action\Action
 	 */
 	protected $comment;
 
+		/**
+		 * @var Rules $rules
+		 */
+	protected $rules;
 
+	/**
+	 * @var User
+	 */
+	protected $user;
 
     /**
      * @var Mail
@@ -50,6 +63,11 @@ class Index extends \Magento\Framework\App\Action\Action
 
 	protected $scopeConfig;
 	protected $inlineTranslation;
+
+	/**
+	 * @var Role
+	 */
+	protected $role;
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
 		\Magento\Framework\View\Result\PageFactory $pageFactory,
@@ -61,8 +79,14 @@ class Index extends \Magento\Framework\App\Action\Action
 		TransportBuilder $transportBuilder,
 		\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
 		 StateInterface $inlineTranslation,
-		 Mail $mailResource
+		 Mail $mailResource,
+		 Role $role,
+		 Rules $rules,
+		 UserInterfaceFactory $userIF
 	) {
+		$this->user= $userIF->create();
+		$this->rules=$rules;
+		$this->role= $role;
 		$this->mailResource = $mailResource;
 		$this->inlineTranslation= $inlineTranslation;
 		$this->_transportBuilder= $transportBuilder;
@@ -76,6 +100,28 @@ class Index extends \Magento\Framework\App\Action\Action
 		return parent::__construct($context);
 	}
 
+	protected function sendMail($templateId,$templateVars,$to){
+		$templateOptions = array('area' => \Magento\Framework\App\Area::AREA_FRONTEND, 
+		'store' =>    $this->storeManager->getStore()->getId()
+		) ;
+		$from = $this->scopeConfig->getValue('blog/general/sender_email') ;
+		
+		$this->inlineTranslation->suspend();
+
+		$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+		
+		$transport = $this->_transportBuilder->setTemplateIdentifier($templateId,$storeScope)
+		->setTemplateOptions($templateOptions)
+			->setTemplateVars($templateVars)
+			->setFrom($from,$storeScope)
+			->addTo($to)
+			->setReplyTo($to)
+			->getTransport();
+
+			$transport->sendMessage();
+		$this->inlineTranslation->resume();
+
+	}
 	public function execute()
 	{
 
@@ -98,42 +144,56 @@ class Index extends \Magento\Framework\App\Action\Action
 		
 		$date = ObjectManager::getInstance()->create(DateTime::class)->gmtDate();
 		$this->comment->setCreationTime($date);
-		/**@var \Magento\Customer\Model\Customer $customer*/
-		$customer= $this->_session->getCustomer();
+		
+		
 		
 			
 		if ($this->commentRepository->save($this->comment)) {
 			// var_dump($config);
-			$templateOptions = array('area' => \Magento\Framework\App\Area::AREA_FRONTEND, 
-			'store' =>    $this->storeManager->getStore()->getId()
-			) ;
 
+			//send mail to customer
+			$customer= $this->_session->getCustomer();
 			$templateVars = array(
 				'name'=> $customer->getName()
 			);
-			$from = $this->scopeConfig->getValue('blog/general/sender_email') ;
-			
-			$this->inlineTranslation->suspend();
-			$emailDestination= $customer->getEmail();
-			$to = $emailDestination;
-
-			$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+			$to= $customer->getEmail();
 			$templateId = $this->scopeConfig->getValue('blog/general/template', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-			
 
-			$transport = $this->_transportBuilder->setTemplateIdentifier($templateId,$storeScope)
-			->setTemplateOptions($templateOptions)
-				->setTemplateVars($templateVars)
-				->setFrom($from,$storeScope)
-				->addTo($to)
-				->setReplyTo($to)
-				->getTransport();
+			$this->sendMail($templateId,$templateVars,$to);
 
-				$transport->sendMessage();
 
-			$this->inlineTranslation->resume();
+			$role_ids= $this->rules->getCollection()
+			->addFieldToFilter('resource_id',self::RULE)
+			->addFilter('permission','allow')
+			->getColumnValues('role_id');
+			// var_dump($role_ids);
+			$roles= $this->role->getCollection()
+			->addFieldToFilter('role_id',$role_ids);
 
-			echo "<b style='color:green;'> Successfully added, please wait for the admin to process</b>";
-		} else echo " <b style='color:red;'>fail, An error has occurred </b>";
+			/**
+			 * @var Role $role
+			 */
+
+			foreach ($roles as $role)
+			{
+				$userIds= $role->getRoleUsers() ;
+				$emails=	$this->user->getCollection()
+				->addFieldToFilter('main_table.user_id',['in'=>$userIds])
+				->getColumnValues('email');
+				//send mail to admins
+				if ( !empty($emails)){
+
+					$templateVars = [];
+					$to= $emails;
+					$templateId = 'blog_general_admin_new_comment';
+		
+					$this->sendMail($templateId,$templateVars,$to);
+
+				}
+
+			}
+
+			echo "<b style='color:green;'>". __('Successfully added, please wait for the admin to process'). "</b>";
+		} else echo " <b style='color:red;'>". __('fail, An error has occurred').  "</b>";
 	}
 }

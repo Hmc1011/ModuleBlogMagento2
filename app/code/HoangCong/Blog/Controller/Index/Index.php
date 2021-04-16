@@ -48,6 +48,7 @@ try {
 
 		$this->_objectManager->get('Psr\Log\LoggerInterface')->debug('toi la cong');
 	echo($this->show);
-		return $this->_pageFactory->create();
+	$page= $this->_pageFactory->create();
+	return $page;
 	}
 }

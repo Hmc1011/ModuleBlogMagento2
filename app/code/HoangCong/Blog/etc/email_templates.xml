@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
     <template id="blog_general_template" label="Comment Mail" file="comment_notification_email.html" type="html" module="HoangCong_Blog" area="frontend"/>
+    <template id="blog_general_admin_new_comment" label="Comment Mail" file="comment_notification_email_admin.html" type="html" module="HoangCong_Blog" area="frontend"/>
+    <template id="comment_notification_email_admin_cron" label="Comment Mail" file="comment_notification_email_admin_cron.html" type="html" module="HoangCong_Blog" area="frontend"/>
+
 </config>

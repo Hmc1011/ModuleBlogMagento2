@@ -2,14 +2,16 @@
 
 namespace HoangCong\Blog\Model;
 
-use Elasticsearch\Endpoints\Ml\GetDatafeeds;
 use Magento\Framework\Model\AbstractExtensibleModel;
 use HoangCong\Blog\Api\Data\CommentExtensionInterface;
 use HoangCong\Blog\Api\Data\CommentInterface;
+use Magento\CatalogImportExport\Model\Import\Proxy\Product\ResourceModel;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 
-class Comment extends AbstractExtensibleModel implements CommentInterface
+class Comment extends AbstractExtensibleModel implements CommentInterface,IdentityInterface
 {
+    const CACHE_TAG = 'hoangcong_blog_post';
 
     /**
    * @var int $customer_id
@@ -23,9 +25,23 @@ class Comment extends AbstractExtensibleModel implements CommentInterface
 
     protected function _construct()
     {
-        $this->_init(ResourceModel\Comment::class);
+        $this->_init(\Hoangcong\Blog\Model\ResourceModel\Comment::class);
     }
-    
+
+    public function getPost()
+    {
+        /**@var  \HoangCong\Blog\Model\Post $post*/
+        $post=  \Magento\Framework\App\ObjectManager::getInstance()
+        ->create(\HoangCong\Blog\Model\Post::class);
+        $post->load($this->getData('post_id'))  ;
+        return $post;
+    }
+
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getPost()->getId()];
+    }
+
     public function getAllCommentOfPost($post_id)
     {
          return   $this->getResource()->getAllCommentOfPost($post_id);

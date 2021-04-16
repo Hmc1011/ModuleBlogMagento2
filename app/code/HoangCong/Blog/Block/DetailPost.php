@@ -1,10 +1,11 @@
 <?php
 namespace HoangCong\Blog\Block;
 use HoangCong\Blog\Api\PostRepositoryInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 
 class DetailPost extends \Magento\Framework\View\Element\Template
 {
-
+    const CACHE_TAG = 'hoangcong_blog_post';
     protected $_postRepository;
 
 	public function __construct(\Magento\Framework\View\Element\Template\Context $context,
@@ -21,4 +22,9 @@ class DetailPost extends \Magento\Framework\View\Element\Template
         $post= $this->_postRepository->getById($post_id);
         return $post;
 	}
+
+    // public function getIdentities()
+    // {
+    //     return [self::CACHE_TAG . '_' . $this->getPost()->getId()];
+    // }
 }

@@ -1,0 +1,25 @@
+<!--@mail is sent from the store @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:30px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+{{template config_path="design/email/header_template"}}
+<table>
+        <tr class="email-intro">
+            <td>
+                    <p>
+                        {{trans "Hello Admin"}}
+                    </p>
+            </td>
+        </tr>
+        <tr class="email-infomation">
+            <td>
+                {{trans "We have received a comment from a customer"}}
+            </td>
+        </tr>
+
+</table>
+{{template config_path="design/email/footer_template"}}
