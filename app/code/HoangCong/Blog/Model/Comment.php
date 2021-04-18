@@ -24,7 +24,7 @@ class Comment extends AbstractExtensibleModel implements CommentInterface,Identi
 
     protected function _construct()
     {
-        $this->_init(\Hoangcong\Blog\Model\ResourceModel\Comment::class);
+        $this->_init(\HoangCong\Blog\Model\ResourceModel\Comment::class);
     }
 
     public function getPost()
