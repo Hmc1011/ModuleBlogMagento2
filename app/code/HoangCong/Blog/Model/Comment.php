@@ -5,7 +5,6 @@ namespace HoangCong\Blog\Model;
 use Magento\Framework\Model\AbstractExtensibleModel;
 use HoangCong\Blog\Api\Data\CommentExtensionInterface;
 use HoangCong\Blog\Api\Data\CommentInterface;
-use Magento\CatalogImportExport\Model\Import\Proxy\Product\ResourceModel;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 

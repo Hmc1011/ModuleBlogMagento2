@@ -2,7 +2,6 @@
 
 namespace HoangCong\Blog\Model;
 
-use Elasticsearch\Endpoints\Ml\GetDatafeeds;
 use Magento\Framework\Model\AbstractExtensibleModel;
 use HoangCong\Blog\Api\Data\PostExtensionInterface;
 use HoangCong\Blog\Api\Data\PostInterface;
