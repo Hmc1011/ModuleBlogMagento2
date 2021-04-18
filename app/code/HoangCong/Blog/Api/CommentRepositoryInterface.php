@@ -45,4 +45,8 @@ interface  CommentRepositoryInterface
      */
     public function disable(CommentInterface $post);
 
+  /**
+   * @var int $customerID 
+   */
+    public function getNewComments($customerID);
 }

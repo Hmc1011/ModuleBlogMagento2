@@ -8,6 +8,7 @@ use HoangCong\Blog\Api\Data\CommentInterface;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 
+
 class Comment extends AbstractExtensibleModel implements CommentInterface,IdentityInterface
 {
     const CACHE_TAG = 'hoangcong_blog_post';
@@ -24,7 +25,7 @@ class Comment extends AbstractExtensibleModel implements CommentInterface,Identi
 
     protected function _construct()
     {
-        $this->_init(\HoangCong\Blog\Model\ResourceModel\Comment::class);
+        $this->_init(ResourceModel\Comment::class);
     }
 
     public function getPost()
@@ -74,4 +75,10 @@ class Comment extends AbstractExtensibleModel implements CommentInterface,Identi
             return true;
 
     }
+
+
+public function getNewComments($customerID)
+{
+    return    $this->getResource()->getNewComments($customerID);
+}
 }

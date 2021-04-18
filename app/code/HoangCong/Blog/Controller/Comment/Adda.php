@@ -19,7 +19,7 @@ use Magento\Authorization\Model\Rules;
 use Magento\User\Api\Data\UserInterfaceFactory;
 use Magento\User\Model\User;
 
-class Index extends \Magento\Framework\App\Action\Action
+class Add extends \Magento\Framework\App\Action\Action
 {
 	const RULE=['HoangCong_Blog::comment','Magento_Backend::all'];
 	protected $_pageFactory;

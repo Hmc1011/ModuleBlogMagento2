@@ -53,23 +53,6 @@ class MassEnable extends Action implements HttpPostActionInterface
         parent::__construct($context);
     }
 
-    private $fullPageCache;
- 
-    private function getCache()
-    {
-        if (!$this->fullPageCache) {
-            $this->fullPageCache = \Magento\Framework\App\ObjectManager::getInstance()->get(
-                \Magento\PageCache\Model\Cache\Type::class
-            );
-        }
-        return $this->fullPageCache;
-    }
-     
-    public function cleanByTags($tags)
-    {
-        $this->getCache()->clean(\Zend_Cache::CLEANING_MODE_MATCHING_TAG, $tags);
-    }
-
     /**
      * comment enable action
      *
@@ -85,8 +68,6 @@ class MassEnable extends Action implements HttpPostActionInterface
         foreach ($collection->getItems() as $comment) {
             $this->commentRepository->enable($comment);
             $commentEnabled++;
-            $tag= $comment->getIdentities();
-             $this->cleanByTags($tag);
         }
 
         if ($commentEnabled) {

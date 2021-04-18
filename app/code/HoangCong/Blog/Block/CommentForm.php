@@ -39,7 +39,7 @@ class CommentForm extends \Magento\Framework\View\Element\Template
 
     public function getUrlAjax()
     {
-            return $this->_url->getUrl('blog/comment');
+            return $this->_url->getUrl('blog/comment/add');
     }
     public function getPostId()
     {

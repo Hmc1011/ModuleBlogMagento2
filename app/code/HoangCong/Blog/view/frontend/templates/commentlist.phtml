@@ -10,3 +10,20 @@ foreach ($block->getComments() as $comment)
 }
 ?>
 </ul>
+
+<div data-role="custom-comment-section" data-bind="scope: 'custom_comment_section'">
+    <div class="content-type" data-bind="foreach: custom_comment_section().comments">
+    <div>
+        <span data-bind="text: $data">
+            </span> : Pending.....  
+        </div>
+    </div>    
+</div>
+
+<script type="text/x-magento-init">
+{
+    "[data-role=custom-comment-section]": {
+        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+    }
+}
+</script>

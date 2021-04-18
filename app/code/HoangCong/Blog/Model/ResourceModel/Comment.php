@@ -83,4 +83,8 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     
     }
 
+    public function getNewComments($customerID)
+    {
+         return  (['comment','hoang']);
+    }
 }

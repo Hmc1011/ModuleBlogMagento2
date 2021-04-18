@@ -3,8 +3,22 @@
 <body>
     <referenceContainer name="content">
         <block class="HoangCong\Blog\Block\DetailPost" name="hoangcongblogdetailpost" template="HoangCong_Blog::detailpost.phtml"/>
-        <block class="HoangCong\Blog\Block\Comments" name="hoangcongblogallcomments" template="HoangCong_Blog::commentlist.phtml"/>
+        <block class="HoangCong\Blog\Block\Comments" name="hoangcongblogallcomments" template="HoangCong_Blog::commentlist.phtml">
+        			<arguments>
+				<argument name="jsLayout" xsi:type="array">
+					<item name="components" xsi:type="array">
+						<item name="custom_comment_section" xsi:type="array">
+							<item name="component" xsi:type="string">
+								HoangCong_Blog/js/view/custom_comment_section
+							</item>
+						</item>
+					</item>
+				</argument>
+			</arguments>
+        </block>        
+
         <block class="HoangCong\Blog\Block\CommentForm" name="hoangcongblogcommentform" template="HoangCong_Blog::commentform.phtml"/>
+
     </referenceContainer>
 </body>
 </page>
