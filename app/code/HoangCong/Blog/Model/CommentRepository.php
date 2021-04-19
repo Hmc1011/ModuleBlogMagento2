@@ -81,9 +81,9 @@ public function delete(CommentInterface $comment)
     $comment->getResource()->delete($comment);
 }
 
-public function getNewComments($customerID)
+public function getNewComments($customerID,$postID)
 {
-    return    $this->commentFactory->create()->getNewComments($customerID);
+    return    $this->commentFactory->create()->getNewComments($customerID,$postID);
 }
 
 }

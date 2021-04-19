@@ -14,8 +14,10 @@ foreach ($block->getComments() as $comment)
 <div data-role="custom-comment-section" data-bind="scope: 'custom_comment_section'">
     <div class="content-type" data-bind="foreach: custom_comment_section().comments">
     <div>
-        <span data-bind="text: $data">
+        <span data-bind="if: ($data.post_id== document.getElementById('id-post').value ) ">
+        <span data-bind="text: $data.comment">
             </span> : Pending.....  
+        </span>
         </div>
     </div>    
 </div>

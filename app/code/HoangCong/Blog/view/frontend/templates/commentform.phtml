@@ -4,7 +4,7 @@ if  ($block->customerLoged())
 ?>    
 
 <form id="comment-form" action="">
-<input name="id" hidden value="<?php echo $block->getPostId();  ?>" type="text" >
+<input id="id-post" name="id" hidden value="<?php echo $block->getPostId();  ?>" type="text" >
 <textarea class="comment-area" required placeholder="comment here"></textarea>
 <button id="comment-submit" class="submit"> submit</button>
 </form>

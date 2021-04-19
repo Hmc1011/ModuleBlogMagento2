@@ -21,6 +21,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     CONST CUSTOMER_COMMENT='hoangcong_blog_customer_comment';
     CONST CUSTOMER_ENTITY='customer_entity';
     CONST BLOG_POST='hoangcong_blog';
+    CONST COMMENT='hoangcong_blog_comment';
 
 
     protected function _construct()
@@ -50,7 +51,7 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $connection = $this->getConnection();
         $tableName= $this->_mainTable;
 
-        $sql = $connection->select()->from($tableName, array('*'))
+        $sql = $connection->select()->from($tableName, array('*'))->where($tableName.'.is_active=?',1)
         ->join(self::COMMENT_POST,self::COMMENT_POST.'.comment_id='.$tableName.'.comment_id AND  '.self::COMMENT_POST.'.post_id='.$post_id  )
         ->join(self::CUSTOMER_COMMENT,self::CUSTOMER_COMMENT.'.comment_id='.self::COMMENT_POST.'.comment_id','customer_id')
         ->join(self::CUSTOMER_ENTITY,self::CUSTOMER_ENTITY.'.entity_id='.self::CUSTOMER_COMMENT.'.customer_id','lastname')
@@ -83,8 +84,18 @@ class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     
     }
 
-    public function getNewComments($customerID)
+    public function getNewComments($customerID,$postID)
     {
-         return  (['comment','hoang']);
+        $connection = $this->getConnection();
+
+        $sql = $connection->select()->from(self::CUSTOMER_COMMENT, array('*'))
+        ->join(self::COMMENT,self::COMMENT.'.comment_id='.self::CUSTOMER_COMMENT.'.comment_id AND '.self::CUSTOMER_COMMENT.'.customer_id='.$customerID .' AND '.self::COMMENT.'.is_active=0' ,['comment','is_active'])
+        ->join(self::COMMENT_POST,self::COMMENT_POST.'.comment_id='.self::CUSTOMER_COMMENT.'.comment_id','post_id')
+        ;
+
+        $k= $sql->__toString();
+        $colResult= $connection->fetchAll($sql);
+
+        return $colResult;
     }
 }

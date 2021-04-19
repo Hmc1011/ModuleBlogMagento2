@@ -77,8 +77,8 @@ class Comment extends AbstractExtensibleModel implements CommentInterface,Identi
     }
 
 
-public function getNewComments($customerID)
+public function getNewComments($customerID,$postID)
 {
-    return    $this->getResource()->getNewComments($customerID);
+    return    $this->getResource()->getNewComments($customerID,$postID);
 }
 }

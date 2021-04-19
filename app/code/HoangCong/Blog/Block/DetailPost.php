@@ -20,7 +20,8 @@ class DetailPost extends \Magento\Framework\View\Element\Template implements Ide
 	{
         $post_id= $this->_request->getParam('post_id');  
         $post= $this->_postRepository->getById($post_id);
-        return $post;
+        if  ($post->isActive()) return $post;
+        return null;
 	}
 
     public function getIdentities()

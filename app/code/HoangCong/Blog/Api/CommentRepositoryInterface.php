@@ -47,6 +47,7 @@ interface  CommentRepositoryInterface
 
   /**
    * @var int $customerID 
+   * @var int $postID
    */
-    public function getNewComments($customerID);
+    public function getNewComments($customerID,$postID);
 }

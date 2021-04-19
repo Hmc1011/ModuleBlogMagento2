@@ -5,7 +5,7 @@ use HoangCong\Blog\Api\CommentRepositoryInterface;
 use Magento\Customer\Model\Session;
 use Magento\Customer\CustomerData\SectionSourceInterface;
 use Magento\Framework\DataObject;
-
+use Magento\Framework\Url;
 
 class CustomCommentSection extends DataObject implements SectionSourceInterface
 {
@@ -29,9 +29,11 @@ class CustomCommentSection extends DataObject implements SectionSourceInterface
     public function getSectionData()
     {
         $customerID= $this->session->getCustomerId();
-        $comments= $this->commentRepository->getNewComments($customerID);
-
-        $d= json_encode($this->_request->getParams());
+        if  ($customerID==null)  return ['comments'=>''];
+    
+        /**@var Url $url */
+        $postID=0;
+        $comments= $this->commentRepository->getNewComments($customerID,$postID);
         $data = ['comments' => $comments];
         return $data;
     }
