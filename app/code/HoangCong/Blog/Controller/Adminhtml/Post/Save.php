@@ -20,6 +20,7 @@ class Save extends Action implements HttpPostActionInterface
      * Authorization level
      */
     const ADMIN_RESOURCE = 'HoangCong_Blog::save';
+    CONST CACHE_TAG="Hoangcong_Blog_List_Post";
 
     /**
      * @var \HoangCong\Blog\Model\ResourceModel\Post\CollectionFactory
@@ -52,6 +53,24 @@ class Save extends Action implements HttpPostActionInterface
         $this->form = $form;
         $this->_urlRewriteFactory = $urlRewriteFactory;
         parent::__construct($context);
+    }
+
+
+    private $fullPageCache;
+
+    private function getCache()
+    {
+        if (!$this->fullPageCache) {
+            $this->fullPageCache = \Magento\Framework\App\ObjectManager::getInstance()->get(
+                \Magento\PageCache\Model\Cache\Type::class
+            );
+        }
+        return $this->fullPageCache;
+    }
+
+    public function cleanByTags($tags)
+    {
+        $this->getCache()->clean(\Zend_Cache::CLEANING_MODE_MATCHING_TAG, $tags);
     }
 
     /**
@@ -118,6 +137,9 @@ class Save extends Action implements HttpPostActionInterface
         $this->messageManager->addSuccessMessage(
             __('you have successfully saved the post ')
         );
+
+
+        $this->cleanByTags([self::CACHE_TAG]);
         return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath($this->_redirect->getRefererUrl() );
 
     }

@@ -5,11 +5,15 @@ use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\FilterGroupBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use HoangCong\Blog\Api\PostRepositoryInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 
 use HoangCong\Blog\Api\Data\PostInterface;
 
-class PostList extends \Magento\Framework\View\Element\Template
+class PostList extends \Magento\Framework\View\Element\Template implements IdentityInterface
 {
+
+    CONST CACHE_TAG="Hoangcong_Blog_List_Post";
+
    /**
      * @var PostRepositoryInterface
      */
@@ -51,4 +55,10 @@ class PostList extends \Magento\Framework\View\Element\Template
 	$posts = $this->postRepository->getList($this->searchCriteriaBuilder->create())->getItems();
 	return  $posts;
 	}
+
+    public function getIdentities()
+    {
+              return [self::CACHE_TAG];
+        
+    }
 }

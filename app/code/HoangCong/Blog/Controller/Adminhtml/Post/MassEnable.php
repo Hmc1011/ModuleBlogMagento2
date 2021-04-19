@@ -17,6 +17,7 @@ class MassEnable extends Action implements HttpPostActionInterface
      * Authorization level
      */
     const ADMIN_RESOURCE = 'HoangCong_Blog::save';
+    CONST CACHE_TAG="Hoangcong_Blog_List_Post";
 
     /**
      * @var \HoangCong\Blog\Model\ResourceModel\Post\CollectionFactory
@@ -53,6 +54,27 @@ class MassEnable extends Action implements HttpPostActionInterface
         parent::__construct($context);
     }
 
+
+
+    private $fullPageCache;
+
+    private function getCache()
+    {
+        if (!$this->fullPageCache) {
+            $this->fullPageCache = \Magento\Framework\App\ObjectManager::getInstance()->get(
+                \Magento\PageCache\Model\Cache\Type::class
+            );
+        }
+        return $this->fullPageCache;
+    }
+
+    public function cleanByTags($tags)
+    {
+        $this->getCache()->clean(\Zend_Cache::CLEANING_MODE_MATCHING_TAG, $tags);
+    }
+
+
+
     /**
      * post enable action
      *
@@ -71,6 +93,8 @@ class MassEnable extends Action implements HttpPostActionInterface
         }
 
         if ($postEnabled) {
+            $this->cleanByTags([self::CACHE_TAG]);
+
             $this->messageManager->addSuccessMessage(
                 __('A total of %1 record(s) have been enabled.', $postEnabled)
             );

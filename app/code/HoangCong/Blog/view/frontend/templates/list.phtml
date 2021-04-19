@@ -1,3 +1,14 @@
+<style>
+
+.text3 {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+</style>
+
 <?php
 foreach ($block->getPosts() as $post)
     {
@@ -8,11 +19,15 @@ foreach ($block->getPosts() as $post)
 </a>
  </h1>
 <i>  <?php  echo $post->getCreationTime();  ?>  </i>
-<p>
 <br>
+<div>
+<div class="text3">
 <?php
 echo $post->getContent(); 
+?>
+</div>
+</div>
 
+<?php
 }
 ?>
-</p>

@@ -6,13 +6,14 @@ use Magento\Framework\Model\AbstractExtensibleModel;
 use HoangCong\Blog\Api\Data\PostExtensionInterface;
 use HoangCong\Blog\Api\Data\PostInterface;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 
-class Post extends AbstractExtensibleModel implements PostInterface
+class Post extends AbstractExtensibleModel implements PostInterface,IdentityInterface
 {
     // const NAME = 'name';
     // const INGREDIENTS = 'ingredients';
     // const IMAGE_URLS = 'image_urls';
-    
+    CONST CACHE_TAG="Hoangcong_Blog_Post";
 
     protected function _construct()
     {
@@ -82,6 +83,11 @@ class Post extends AbstractExtensibleModel implements PostInterface
     public function getAvailableStatuses()
     {
         return [self::STATUS_ENABLED => __('Enabled'), self::STATUS_DISABLED => __('Disabled')];
+    }
+
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
     // public function setName($name)
