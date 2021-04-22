@@ -176,7 +176,7 @@ class MassDeleteTest extends TestCase
         $comments=[$commentInterface];
 
         $collection= $this->createPartialMock(Collection::class,['getItems']);
-        $collection->expects($this->any())->method('getItems')->willReturn($comments);
+        $collection->expects($this->once())->method('getItems')->willReturn($comments);
 
         $abstractDb= $this->createMock(\Magento\Framework\Data\Collection\AbstractDb::class);
 
@@ -185,7 +185,7 @@ class MassDeleteTest extends TestCase
 
         $this->filter->expects($this->once())->method('getCollection')->with($abstractDb)->willReturn($collection);
 
-        $this->messageManager->expects($this->any())->method('addSuccessMessage')->with(
+        $this->messageManager->expects($this->once())->method('addSuccessMessage')->with(
             __('A total of %1 record(s) have been deleted.', 1)
         );
         $this->unit->execute();
