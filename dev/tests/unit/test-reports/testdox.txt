@@ -1,0 +1,4 @@
+Mass Delete (HoangCong\Blog\Test\Unit\Controller\Adminhtml\Comment\MassDelete)
+ [x] With not post request
+ [x] With filter
+

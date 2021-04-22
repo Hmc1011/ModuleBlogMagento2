@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
+colors="true" bootstrap="./framework/bootstrap.php"
+>
+<testsuite name="Specific Magento 2 unit tests">
+<directory suffix="Test.php">../../../app/code/HoangCong/Blog/Test/Unit</directory>
+</testsuite>
+<php>
+<ini name="date.timezone" value="America/Los_Angeles"/>
+<ini name="xdebug.max_nesting_level" value="200"/>
+</php>
+<logging>
+<log type="testdox-html" target="./test-reports/testdox.html" />
+<log type="testdox-text" target="./test-reports/testdox.txt" />
+</logging>
+</phpunit>
